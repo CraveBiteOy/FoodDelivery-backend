@@ -1,0 +1,1371 @@
+{
+	"info": {
+		"_postman_id": "c6b86504-2468-4a4b-86dc-baa421309df1",
+		"name": "food delivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19366908"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "signIn",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"khanh\",\r\n    \"password\": \"123456\",\r\n    \"longitude\": 25.4741416,\r\n    \"latitude\": 65.0568661\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/signIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan2\",\r\n    \"password\": \"123456\",\r\n    \"firstname\": \"quan2\",\r\n    \"surename\": \"doan\",\r\n    \"gender\": \"MALE\",\r\n    \"description\": \"hello\",\r\n    \"birth\": \"1993-08-10\",\r\n    \"longitude\": 65.0569611,\r\n    \"latitude\": 25.4743148,\r\n    \"interests\": [\"jogging\", \"walking\", \"football\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTQ2MzkyLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.CMkQl3Rlh7eduGq_JfvOAhWvQZXDgAu17OKVihrP9AfnB-8Tl8pfVc-M4wjk4elc8qHnqex9V7RVNYMCn3Vqlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/username/quan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"username",
+								"quan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get authUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg1MDQ3ODIxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.nkScf8dXsfYk9wCmHxsJkbQdUGoNAbb6empJ5V-4YaercAUX0UK8YCQWQyPj5T2smhFIJcTL3ZtzK6dg-DeD0Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/authUser/getAuthUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"authUser",
+								"getAuthUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Owner",
+			"item": [
+				{
+					"name": "get owner by owner Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTQ3MzIyLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.CljsYJqjlDSt1Az9MF39U5fAuP_7D2JYYFGudzY3lA57DJ-ULcvFZ1Lg2-BUBgnmCgFkOMI5R2kbTKOnzDBwiw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/owners/owner/id/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"owners",
+								"owner",
+								"id",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get owner by authenticated user or if the authenticated user does not have owner, the new owner will be created",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTYxMzYyLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.urS_kHOG0Y1dpIV8TTLvZn4YK51uMo1iQxdW_pifn_CUr4hs-hHPWkScegzVSAYBALVzbjTyZBIZh0-UHBwRog",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/owners/owner/authenticatedUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"owners",
+								"owner",
+								"authenticatedUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get the list of or all owners",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTYzMTgzLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.kQXBp6bXCLFJT2ecpqdPRyTkeokXTBL34_-SPj4QYUn3vx-kwt_k0Ii9djXyfllGgV0Vs5_fx2_BCJNCv83fKA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/owners/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"owners",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "restaurant",
+			"item": [
+				{
+					"name": "get all restaurants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY0MTU5LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.RGj_UUli5DUcBfCH3IMxY4FbEyRf1iQt53mObUD_ltysnD4G7M0vNTp8B1xPbOJfTWx1B4h94oUZn1SPk90beQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurant by restaurant id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY0MTU5LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.RGj_UUli5DUcBfCH3IMxY4FbEyRf1iQt53mObUD_ltysnD4G7M0vNTp8B1xPbOJfTWx1B4h94oUZn1SPk90beQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/restaurant/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"restaurant",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update restaurant by restaurant id for new name and new image url",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY1NTk4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.0kWa1oHCFql_ilv5mcs_0LiZYxuZldXZMZw6qj7XJpgyDDs2e7W96fa38IHYEOHl4h_WGeI4RKoUveV1T2PFiQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/restaurant/id/5?name=mehilainen&imageurl=kjhaksjdhf.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"restaurant",
+								"id",
+								"5"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "mehilainen"
+								},
+								{
+									"key": "imageurl",
+									"value": "kjhaksjdhf.png"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get restaurant by by restaurant name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY0MTU5LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.RGj_UUli5DUcBfCH3IMxY4FbEyRf1iQt53mObUD_ltysnD4G7M0vNTp8B1xPbOJfTWx1B4h94oUZn1SPk90beQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/restaurant/name/pure maku",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"restaurant",
+								"name",
+								"pure maku"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all restaurants for the specific owner id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4ODk2NjQ3OCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KO0q5WYITjwPzfh0FQyBVbbMtLMwUACgYoCgDUVnzaDnMlnNiVz6XrZ3MRYhiWDMlNe4l1aMBJnpSi1-BMunvQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/owner/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"owner",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all recommended restaurants for the authenticated customers based on his current location within 20km",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY0NTY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19._T5zj7KeSlsOKy0jVUGPfbDiQmkrTwvTS7JwN6hZImAcT_FQhoYEVW8Q3dsIgUZ4VAw3CQ_xs9a2WM1jz_L-_w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/recommendation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"recommendation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create new restaurant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY1NDA2LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Lxwvc_eS73eQrsQ_7SgkbaBVB7dFS3kRTnb1PV0jMeFIfgppvMhy24dVx8XOkvr1aEN8aLB6RgrEsAOyUtSz1g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"terveystalo\",\r\n    \"address\": \"yliopistokatu 2\",\r\n    \"imageurl\": \"lkajsdlfkjsldf.png\",\r\n    \"city\": \"oulu\",\r\n    \"zipcode\": \"90570\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/restaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"restaurant"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dish",
+			"item": [
+				{
+					"name": "get dish by by dish Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY2MDE3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.3SXJGMzrWq3er8IIrpcqpLpfdYsqJPehUzzUstBopn4BQeyN3HHvOH8s0fPwtFA6C94Q4ViZV0MCjRXcPxEtcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/dish/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"dish",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get dishes by by restaurant Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/restaurant/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"restaurant",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new dish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4ODk2NjQ3OCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KO0q5WYITjwPzfh0FQyBVbbMtLMwUACgYoCgDUVnzaDnMlnNiVz6XrZ3MRYhiWDMlNe4l1aMBJnpSi1-BMunvQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"choimin\",\r\n    \"description\": \"chinese noodle style\",\r\n    \"price\": 11,\r\n    \"restaurant\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/dish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"dish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update dish by by dish Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4ODk2NjQ3OCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KO0q5WYITjwPzfh0FQyBVbbMtLMwUACgYoCgDUVnzaDnMlnNiVz6XrZ3MRYhiWDMlNe4l1aMBJnpSi1-BMunvQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"choimin\",\r\n    \"description\": \"chinese noodle style\",\r\n    \"price\": 11,\r\n    \"restaurant\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/dish/17?name=choy min 2&description=spicy&price=12&imageurl=image.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"dish",
+								"17"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "choy min 2"
+								},
+								{
+									"key": "description",
+									"value": "spicy"
+								},
+								{
+									"key": "price",
+									"value": "12"
+								},
+								{
+									"key": "imageurl",
+									"value": "image.png"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update the available status of dish (true or false)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4ODk2NjQ3OCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KO0q5WYITjwPzfh0FQyBVbbMtLMwUACgYoCgDUVnzaDnMlnNiVz6XrZ3MRYhiWDMlNe4l1aMBJnpSi1-BMunvQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"choimin\",\r\n    \"description\": \"chinese noodle style\",\r\n    \"price\": 11,\r\n    \"restaurant\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/dishes/dish/17/availability/false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"dishes",
+								"dish",
+								"17",
+								"availability",
+								"false"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "choy min 2",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "spicy",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "imageurl",
+									"value": "image.png",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "get customer by authenticated user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY3MDg4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.qeEpS5fCHlm97zwP8-hF95TFIDtfphyaE42y7o7mmOrIRoyQWgSGpHNj0iEu8vfK75RLxz0nxSk23ZYeL1K4jQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/customers/customer/authenticatedUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customers",
+								"customer",
+								"authenticatedUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY3MDg4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.qeEpS5fCHlm97zwP8-hF95TFIDtfphyaE42y7o7mmOrIRoyQWgSGpHNj0iEu8vfK75RLxz0nxSk23ZYeL1K4jQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/customers/customer/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customers",
+								"customer",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courier",
+			"item": [
+				{
+					"name": "get courier by authenticated user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get courier by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status for authenticated courier (ONLINE / OFFLINE)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated/status/ONLINE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated",
+								"status",
+								"ONLINE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update location for authenticated courier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated/longitude/65.000/latitude/25.111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated",
+								"longitude",
+								"65.000",
+								"latitude",
+								"25.111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update location and availability for authenticated courier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated/longitude/65.000/latitude/25.111/available/true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated",
+								"longitude",
+								"65.000",
+								"latitude",
+								"25.111",
+								"available",
+								"true"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update availability for authenticated courier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated/available/false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated",
+								"available",
+								"false"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list of available and online couriers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/online/available",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"online",
+								"available"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket",
+			"item": [
+				{
+					"name": "get basket by authenticated user and restaurant Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/baskets/authenticatedUser/restaurant/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"baskets",
+								"authenticatedUser",
+								"restaurant",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get basket by customer ID and restaurant ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/baskets/customer/1/restaurant/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"baskets",
+								"customer",
+								"1",
+								"restaurant",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get basket by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/baskets/basket/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"baskets",
+								"basket",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add dish to basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/baskets/basket/1/dish/6/quantity/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"baskets",
+								"basket",
+								"1",
+								"dish",
+								"6",
+								"quantity",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove basket dish from basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/baskets/remove/basketDish/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"baskets",
+								"remove",
+								"basketDish",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove all basket dishes from basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/baskets/remove/all/basket/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"baskets",
+								"remove",
+								"all",
+								"basket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BasketDish",
+			"item": [
+				{
+					"name": "get basket dish by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/BasketDishes/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"BasketDishes",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list of basket dishes by basket Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/BasketDishes/basket/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"BasketDishes",
+								"basket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list of basket dishes by basket Id Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/BasketDishes/dish/6/basket/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"BasketDishes",
+								"dish",
+								"6",
+								"basket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
