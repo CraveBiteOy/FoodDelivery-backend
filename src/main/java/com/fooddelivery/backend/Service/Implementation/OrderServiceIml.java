@@ -155,6 +155,9 @@ public class OrderServiceIml implements OrderService{
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to accept the order");
         }
+        if(!order.getStatus().equals(OrderStatus.READY_FOR_PICKUP)) {
+            throw new BadResultException("the order status is wrong");
+        }
         order.setStatus(OrderStatus.COURIER_ACCEPTED);
         orderRepos.save(order);
 
@@ -171,6 +174,9 @@ public class OrderServiceIml implements OrderService{
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to reject the order");
         }
+        if(!order.getStatus().equals(OrderStatus.READY_FOR_PICKUP)) {
+            throw new BadResultException("the order status is wrong");
+        }
         Courier newCourier = reachCourier(order);
         order.setCourier(newCourier);
         order = orderRepos.save(order);
@@ -183,6 +189,9 @@ public class OrderServiceIml implements OrderService{
         Courier courier = courierService.getByAuthenticatedUser();
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to pick up the order");
+        }
+         if(!order.getStatus().equals(OrderStatus.COURIER_ACCEPTED)) {
+            throw new BadResultException("the order status is wrong");
         }
         
         // calculate the distace between restaurant and courier
@@ -201,6 +210,9 @@ public class OrderServiceIml implements OrderService{
         Courier courier = courierService.getByAuthenticatedUser();
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to pick up the order");
+        }
+        if(!order.getStatus().equals(OrderStatus.PICKED_UP)) {
+            throw new BadResultException("the order status is wrong");
         }
         
         // calculate the distace between customer and courier
