@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fooddelivery.backend.Models.Enums.CourierStatus;
+import com.fooddelivery.backend.Models.Enums.NavigationMode;
 import com.fooddelivery.backend.Models.Enums.OrderStatus;
 import com.fooddelivery.backend.Models.Enums.Role;
 import jakarta.persistence.*;
@@ -37,15 +38,20 @@ public class Courier {
     @Column(name = "available")
     private boolean available;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "mode", nullable = false)
+    private NavigationMode mode;
+
     @JsonIgnore
     @OneToMany(mappedBy = "courier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
 
-    public Courier(Users user) {
+    public Courier(Users user, NavigationMode mode) {
         this.user = user;
         this.status = CourierStatus.OFFLINE;
         this.available = false;
+        this.mode = mode;
     }
 
     

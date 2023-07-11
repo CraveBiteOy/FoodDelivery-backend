@@ -19,8 +19,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "Order")
-@Table(name = "order")
+@Entity(name = "Orders")
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -51,11 +51,32 @@ public class Order {
     @Column(name = "total")
     private double total;
 
-    @Column(name = "longitude")
-    private Double longitude;
+    @Min(value = 0, message = "total delivery fee must be higher than 0")
+    @Column(name = "delivery_fee")
+    private double deliveryFee;
 
-    @Column(name = "latitude")
-    private Double latitude;
+    @Min(value = 0, message = "finalPrice price must be higher than 0")
+    @Column(name = "final_price")
+    private double finalPrice;
+
+    @Min(value = 0, message = "quantity must be higher than 0")
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "note")
+    private String note;
+
+    @Column(name = "to_longitude")
+    private Double toLongitude;
+
+    @Column(name = "to_latitude")
+    private Double toLatitude;
+
+    @Column(name = "from_longitude")
+    private Double fromLongitude;
+
+    @Column(name = "from_latitude")
+    private Double fromLatitude;
 
     @JsonIgnore
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -78,6 +99,18 @@ public class Order {
         this.status = status;
         this.total = 0;
     }
+
+    public Order(Customer customer, Restaurant restaurant, OrderStatus status, double total, int quantity, Double toLongitude, Double toLatitude) {
+        this.customer = customer;
+        this.restaurant = restaurant;
+        this.status = status;
+        this.total = total;
+        this.quantity = quantity;
+        this.toLongitude = toLongitude;
+        this.toLatitude = toLatitude;
+    }
+
+    
 
     
 

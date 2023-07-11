@@ -11,6 +11,7 @@ import com.fooddelivery.backend.Exception.EntityNotFoundException;
 import com.fooddelivery.backend.Models.Courier;
 import com.fooddelivery.backend.Models.Users;
 import com.fooddelivery.backend.Models.Enums.CourierStatus;
+import com.fooddelivery.backend.Models.Enums.NavigationMode;
 import com.fooddelivery.backend.Repository.CourierRepos;
 import com.fooddelivery.backend.Repository.UserRepos;
 import com.fooddelivery.backend.Service.CourierService;
@@ -31,7 +32,7 @@ public class CourierServiceIml implements CourierService {
         Users authUser = userService.getAuthUser();
         Optional<Courier> entity = courierRepos.findByUser(authUser);
         if(!entity.isPresent()) {
-            Courier courier = new Courier(authUser);
+            Courier courier = new Courier(authUser, NavigationMode.BICYCLE);
             return courierRepos.save(courier);
         } else {
             Courier courier = entity.get();
