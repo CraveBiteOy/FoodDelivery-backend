@@ -11,6 +11,7 @@ public interface RestaurantService {
     Restaurant update(Long id, String name,  String imageurl);
     Restaurant getById(Long id);
     Restaurant getByName(String name);
+    Restaurant updateReview(Long id, int rating);
     List<RestaurantResponse> getRestauranstsByDistanceOfCustomer();
     List<Restaurant> getAll();
     List<Restaurant> getByOwner(Long ownerId);

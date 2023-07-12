@@ -17,6 +17,7 @@ import com.fooddelivery.backend.Models.OrderDish;
 import com.fooddelivery.backend.Models.Owner;
 import com.fooddelivery.backend.Models.Restaurant;
 import com.fooddelivery.backend.Models.Users;
+import com.fooddelivery.backend.Models.Enums.NavigationMode;
 import com.fooddelivery.backend.Models.Enums.OrderStatus;
 import com.fooddelivery.backend.Models.Request.OrderRequest;
 import com.fooddelivery.backend.Repository.BasketDishRepos;
@@ -36,6 +37,11 @@ import com.fooddelivery.backend.Utils.GeoCoding;
 
 @Service
 public class OrderServiceIml implements OrderService{
+    private final double fixedFeeForPickupOrder = 3.00;
+    private final double fixedFeeForOneKilometer = 1.00;
+    private final double fixedTimeForOneKilometer = 5;
+    private final double navigationModeDistance = 5;
+
     @Autowired
     OrderRepos orderRepos;
     @Autowired
@@ -91,11 +97,14 @@ public class OrderServiceIml implements OrderService{
 
         // calculate the delivery fee;
 
-        final double fixedFeeForPickupOrder = 3.00;
-        final double fixedFeeForOneKilometer = 1.00;
+       
         double distance = distanceCoding.distanceCalculator(order.getFromLatitude(), order.getToLatitude(), order.getFromLongitude(), order.getToLongitude());
         order.setDeliveryFee(fixedFeeForPickupOrder + (distance * fixedFeeForOneKilometer));
         order.setFinalPrice(order.getTotal() + order.getDeliveryFee());
+        order.setD2Distance(distance);
+
+        order.setTotalTime(restaurant.getCookingTime() + (int) Math.round(distance * fixedTimeForOneKilometer));
+
         final Order finalOrder = orderRepos.save(order);
 
         // create orderDishes from basketDishes in the basket
@@ -315,31 +324,45 @@ public class OrderServiceIml implements OrderService{
 
     // find the active and available courier whose location is closest to the restaurant to carry out the order after the order's cooking stage is done
     private Courier reachCourier(Order order) {
-        List<Courier> couriers = courierService.getOnlineAndAvailableCouriers();
-        Double longitude = order.getFromLongitude();
-        Double latitude = order.getFromLatitude();
-        double shortestDistance;
-        Courier courier;
-        courier = couriers.get(0);
-        shortestDistance = distanceCoding.distanceCalculator(latitude, courier.getUser().getLatitude(), longitude, courier.getUser().getLongitude());
-
-
-        // comparing the distace to restaurant amongst couriers 
-        for(int i = 1; i < couriers.size() - 1; i++) {
-            Courier courier2 = couriers.get(i);
-            double distance = distanceCoding.distanceCalculator(latitude, courier2.getUser().getLatitude(), longitude, courier2.getUser().getLongitude());
-
-            if(distance < shortestDistance) {
-                shortestDistance = distance;
-                courier = courier2;
-            }
-        }
-
-        if(shortestDistance <= 20) {
-            return courier;
+        List<Courier> couriers;
+        
+        if(order.getD2Distance() > navigationModeDistance) {
+            couriers = courierService.getOnlineAndAvailableCouriersFromMode(NavigationMode.CAR);
         } else {
-             throw new BadResultException("there is no available courier for the order");
+            couriers = courierService.getOnlineAndAvailableCouriersFromMode(NavigationMode.BICYCLE);
         }
+        System.out.println(couriers);
+        if (couriers.size() == 0) {
+            throw new BadResultException("there is no available courier for the order");
+        }
+        else if (couriers.size() == 1) {
+           return couriers.get(0);
+        } 
+            Double longitude = order.getFromLongitude();
+            Double latitude = order.getFromLatitude();
+            Courier courier;
+            double shortestDistance;
+            courier = couriers.get(0);
+            shortestDistance = distanceCoding.distanceCalculator(latitude, courier.getUser().getLatitude(), longitude, courier.getUser().getLongitude());
+
+            // comparing the distace to restaurant amongst couriers 
+            for(int i = 1; i < couriers.size() - 1; i++) {
+                Courier courier2 = couriers.get(i);
+                double distance = distanceCoding.distanceCalculator(latitude, courier2.getUser().getLatitude(), longitude, courier2.getUser().getLongitude());
+
+                if(distance < shortestDistance) {
+                    shortestDistance = distance;
+                    courier = courier2;
+                }
+            }
+            if (shortestDistance <= 20) {
+                return courier;
+            } else {
+                System.out.println(courier);
+                System.out.println(shortestDistance);
+                throw new BadResultException("there is no available courier for the order");
+            } 
+          
     }
     
 }

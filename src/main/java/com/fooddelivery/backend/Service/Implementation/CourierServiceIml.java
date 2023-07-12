@@ -58,6 +58,12 @@ public class CourierServiceIml implements CourierService {
     }
 
     @Override
+    public List<Courier> getOnlineAndAvailableCouriersFromMode(NavigationMode mode) {
+        List<Courier> list = courierRepos.findByAvailable(true).stream().filter(courier -> courier.getStatus().equals(CourierStatus.ONLINE) && courier.getMode().equals(mode)).collect(Collectors.toList());
+        return list;
+    }
+
+    @Override
     public Courier updateAvailableForAuthCourier(boolean available) {
         Courier courier = getByAuthenticatedUser();
         courier.setAvailable(available);;

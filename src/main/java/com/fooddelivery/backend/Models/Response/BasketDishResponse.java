@@ -13,6 +13,6 @@ import lombok.Setter;
 public class BasketDishResponse {
     private Long id;
     private int quantity;
-    private DishResponse dishResponse;
+    private DishResponse dish;
     private Long basket;
 }

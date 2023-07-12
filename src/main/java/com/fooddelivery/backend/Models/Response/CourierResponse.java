@@ -1,5 +1,6 @@
 package com.fooddelivery.backend.Models.Response;
 import com.fooddelivery.backend.Models.Enums.CourierStatus;
+import com.fooddelivery.backend.Models.Enums.NavigationMode;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,4 +16,5 @@ public class CourierResponse {
     private UserResponse user;
     private CourierStatus status;
     private boolean available;
+    private NavigationMode mode;
 }

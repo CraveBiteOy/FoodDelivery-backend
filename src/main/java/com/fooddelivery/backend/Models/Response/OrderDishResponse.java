@@ -9,6 +9,6 @@ import lombok.*;
 public class OrderDishResponse {
     private Long id;
     private int quantity;
-    private DishResponse dishResponse;
+    private DishResponse dish;
     private Long order;
 }

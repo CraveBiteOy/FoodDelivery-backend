@@ -18,11 +18,12 @@ public class OrderDishMapper {
 
 
     public OrderDishResponse mapOrderDishToMap(OrderDish orderDish) {
-        ModelMapper modelMapper = new ModelMapper();
-        TypeMap<OrderDish, OrderDishResponse> typeMap = modelMapper.createTypeMap(OrderDish.class, OrderDishResponse.class);
-        typeMap.addMapping(src -> src.getOrder().getId(), OrderDishResponse::setOrder);
-        OrderDishResponse res = modelMapper.map(orderDish, OrderDishResponse.class);
-        res.setDishResponse(dishMapper.mapDishToResponse(orderDish.getDish()));
+        // ModelMapper modelMapper = new ModelMapper();
+        // TypeMap<OrderDish, OrderDishResponse> typeMap = modelMapper.createTypeMap(OrderDish.class, OrderDishResponse.class);
+        // typeMap.addMapping(src -> src.getOrder().getId(), OrderDishResponse::setOrder);
+        // OrderDishResponse res = modelMapper.map(orderDish, OrderDishResponse.class);
+        // res.setDishResponse(dishMapper.mapDishToResponse(orderDish.getDish()));
+        OrderDishResponse res = new OrderDishResponse(orderDish.getId(), orderDish.getQuantity(), dishMapper.mapDishToResponse(orderDish.getDish()), orderDish.getOrder().getId());
         return res;
     }
 }

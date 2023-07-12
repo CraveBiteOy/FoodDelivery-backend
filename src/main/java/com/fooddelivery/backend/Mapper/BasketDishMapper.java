@@ -18,16 +18,17 @@ public class BasketDishMapper {
 
 
     public BasketDishResponse mapBasketDishToResponse(BasketDish basketDish) {
-        ModelMapper modelMapper = new ModelMapper();
-        TypeMap<BasketDish, BasketDishResponse> typemap = modelMapper.createTypeMap(BasketDish.class, BasketDishResponse.class);
+        // ModelMapper modelMapper = new ModelMapper();
+        // TypeMap<BasketDish, BasketDishResponse> typemap = modelMapper.createTypeMap(BasketDish.class, BasketDishResponse.class);
 
-        typemap.addMapping(src -> src.getBasket().getId(), BasketDishResponse::setBasket);
-        // typemap.addMapping(src -> new DishResponse(src.getDish().getId(), src.getDish().getName(), src.getDish().getImageurl(), src.getDish().getDescription(), src.getDish().getPrice(), src.getDish().getAvailability(), src.getDish().getRestaurant().getId(), src.getDish().getCreatedDate(), src.getDish().getUpdatedDate()), BasketDishResponse::setDish);
+        // typemap.addMapping(src -> src.getBasket().getId(), BasketDishResponse::setBasket);
+        // // typemap.addMapping(src -> new DishResponse(src.getDish().getId(), src.getDish().getName(), src.getDish().getImageurl(), src.getDish().getDescription(), src.getDish().getPrice(), src.getDish().getAvailability(), src.getDish().getRestaurant().getId(), src.getDish().getCreatedDate(), src.getDish().getUpdatedDate()), BasketDishResponse::setDish);
 
 
-        BasketDishResponse res = modelMapper.map(basketDish, BasketDishResponse.class);
-        res.setDishResponse(dishMapper.mapDishToResponse(basketDish.getDish()));
+        // BasketDishResponse res = modelMapper.map(basketDish, BasketDishResponse.class);
+        // res.setDishResponse(dishMapper.mapDishToResponse(basketDish.getDish()));
         // res.setBasket(basketDish.getBasket().getId());
+        BasketDishResponse res = new BasketDishResponse(basketDish.getId(), basketDish.getQuantity(), dishMapper.mapDishToResponse(basketDish.getDish()), basketDish.getBasket().getId());
         return res;
     }
 

@@ -40,6 +40,13 @@ public class RestaurantController {
         return new ResponseEntity<RestaurantResponse>(res, HttpStatus.OK);
     }
 
+    // update rating
+    @GetMapping("/restaurant/id/{id}/rating/{rating}")
+    public ResponseEntity<RestaurantResponse> updaterating(@PathVariable Long id, @PathVariable int rating) {
+        RestaurantResponse res = restaurantMapper.mapRestaurantToResponse(restaurantService.updateReview(id, rating));
+        return new ResponseEntity<RestaurantResponse>(res, HttpStatus.OK);
+    }
+
     // get restaurant by restaurant name
     @GetMapping("/restaurant/name/{name}")
     public ResponseEntity<RestaurantResponse> getByName(@PathVariable String name) {

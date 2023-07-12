@@ -59,6 +59,14 @@ public class Order {
     @Column(name = "final_price")
     private double finalPrice;
 
+    @Min(value = 0, message = "d2_distance price must be higher than 0")
+    @Column(name = "d2_distance")
+    private double d2Distance;
+
+    @Min(value = 0, message = "total time must be higher than 0")
+    @Column(name = "total_time")
+    private int totalTime;
+
     @Min(value = 0, message = "quantity must be higher than 0")
     @Column(name = "quantity")
     private int quantity;

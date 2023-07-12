@@ -9,10 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fooddelivery.backend.Models.Courier;
 import com.fooddelivery.backend.Models.Dish;
 import com.fooddelivery.backend.Models.Owner;
 import com.fooddelivery.backend.Models.Restaurant;
 import com.fooddelivery.backend.Models.Users;
+import com.fooddelivery.backend.Models.Enums.CourierStatus;
+import com.fooddelivery.backend.Models.Enums.NavigationMode;
 import com.fooddelivery.backend.Models.Enums.Role;
 import com.fooddelivery.backend.Repository.CourierRepos;
 import com.fooddelivery.backend.Repository.CustomerRepos;
@@ -41,7 +44,7 @@ public class BackendApplication {
 			bo.getRoles().add(Role.USER);
 			Users my = new Users("my", new BCryptPasswordEncoder().encode("123456"), "my", "nguyen",   60.2646166, 25.0862993);
 			my.getRoles().add(Role.USER);
-			Users hairj = new Users("hairj", new BCryptPasswordEncoder().encode("123456"), "hairj", "mohammed",   60.2646111, 25.0862914);
+			Users hairj = new Users("hairj", new BCryptPasswordEncoder().encode("123456"), "hairj", "mohammed",   65.011121, 25.4734533);
 			my.getRoles().add(Role.USER);
 			userRepos.save(quan);
 			userRepos.save(khanh);
@@ -50,21 +53,34 @@ public class BackendApplication {
 			userRepos.save(my);
 			userRepos.save(hairj);
 
+			Courier courier1 = new Courier(hairj, NavigationMode.CAR);
+			courier1.setStatus(CourierStatus.ONLINE);
+			courier1.setAvailable(true);
+			Courier courier2 = new Courier(my, NavigationMode.BICYCLE);
+			courier2.setStatus(CourierStatus.ONLINE);
+			courier2.setAvailable(true);
+			courierRepos.save(courier1);
+			courierRepos.save(courier2);
+
 			Owner owner1 = new Owner(khanh);
 			Owner owner2 = new Owner(duy);
 			ownerRepos.save(owner1);
 			ownerRepos.save(owner2);
 
 			Restaurant puremaku = new Restaurant("pure maku", "Pakkahuoneenkatu 5 B22", "90100", "oulu", "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant1.jpeg", owner1, 65.0124023, 25.4723617, 3.00);
+			puremaku.setCookingTime(20);
 			restaurantRepos.save(puremaku);
 
-			Restaurant nekosama = new Restaurant("nekosama", "Kauppakortteli Pekuri, Kirkkokatu 16", "90100", "oulu", "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant2.jpeg", owner2, 65.0114363, 25.4687467, 4.00);
+			Restaurant nekosama = new Restaurant("nekosama", "Kauppakortteli Pekuri, Kirkkokatu 16", "90100", "oulu", "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant2.jpeg", owner2, 65.0147, 25.4962, 4.00);
+			nekosama.setCookingTime(30);
 			restaurantRepos.save(nekosama);
 
 			Restaurant  kaupuri5= new Restaurant("kaupuri5", "Kauppurienkatu 5", "90100", "oulu", "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant3.jpeg", owner2, 65.0128871, 25.466887, 4.00);
+			kaupuri5.setCookingTime(10);
 			restaurantRepos.save(kaupuri5);
 
 			Restaurant burgerKing= new Restaurant("burgerKing", "Ritaharjuntie 49", "90540", "oulu", "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/uber-eats/restaurant3.jpeg", owner1, 65.0775092, 25.4475889, 3.50);
+			burgerKing.setCookingTime(10);
 			restaurantRepos.save(burgerKing);
 
 

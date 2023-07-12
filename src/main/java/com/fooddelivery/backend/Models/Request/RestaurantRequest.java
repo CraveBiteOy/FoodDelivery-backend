@@ -16,13 +16,15 @@ public class RestaurantRequest {
      private String zipcode;
      private Double latitude;
      private Double longitude;
+     private int cookingTime;
 
-     public RestaurantRequest(String name, String address, String imageurl, String city, String zipcode) {
+     public RestaurantRequest(String name, String address, String imageurl, String city, String zipcode, int cookingTime) {
           this.name = name;
           this.address = address;
           this.imageurl = imageurl;
           this.city = city;
           this.zipcode = zipcode;
+          this.cookingTime = cookingTime;
      }
      
 }

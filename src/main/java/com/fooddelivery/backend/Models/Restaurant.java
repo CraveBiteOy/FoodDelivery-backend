@@ -61,6 +61,9 @@ public class Restaurant {
     @Column(name = "imageurl")
     private String imageurl;
 
+    @Column(name = "cooking_time")
+    private int cookingTime;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")

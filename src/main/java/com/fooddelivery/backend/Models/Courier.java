@@ -54,5 +54,11 @@ public class Courier {
         this.mode = mode;
     }
 
+
+    @Override
+    public String toString() {
+        return "Courier [id=" + id + ", status=" + status + ", available=" + available + ", mode=" + mode + "]";
+    }
+
     
 }

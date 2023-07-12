@@ -70,6 +70,17 @@ public class RestaurantServiceIml implements RestaurantService {
     }
 
     @Override
+    public Restaurant updateReview(Long id, int rating) {
+        Restaurant restaurant = getById(id);
+        if(restaurant.getRating() == null) {
+            restaurant.setRating(Double.valueOf(rating));
+        } else {
+            restaurant.setRating((Double.valueOf(rating) + restaurant.getRating()) / 2);
+        }
+        return restaurantRepos.save(restaurant);
+    }
+
+    @Override
     public Restaurant getByName(String name) {
         Optional<Restaurant> entity = restaurantRepos.findByName(name);
         if(!entity.isPresent()) {
@@ -102,6 +113,7 @@ public class RestaurantServiceIml implements RestaurantService {
         Users authUser = userService.getAuthUser();
         Owner owner = ownerService.getOwnerByAuthenticatedUser();
         Restaurant restaurant = new Restaurant(req.getName(), req.getAddress(), req.getZipcode(), req.getCity(), req.getImageurl(), owner);
+        restaurant.setCookingTime(req.getCookingTime());
         req = geoCoding.geoLocationEncode(req);
         restaurant.setLatitude(req.getLatitude());
         restaurant.setLongitude(req.getLongitude());

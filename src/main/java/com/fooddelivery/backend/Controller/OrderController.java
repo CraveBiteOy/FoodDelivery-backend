@@ -235,7 +235,7 @@ public class OrderController {
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
 
-    // update the location for order after being picked up by the courier 
+    // update the location for order after being picked up by the courier, the longitude and latitude request are gotten from the location of authenticated courier 
     @PutMapping("/order/id/{id}/locationUpdate")
     public ResponseEntity<OrderResponse> updateOrderLocation(@PathVariable Long id) {
         Order order = orderService.updateLocationOfTheOrder(id);

@@ -26,6 +26,7 @@ public class RestaurantResponse {
     private Double latitude;
     private Double longitude;
     private Double rating;
+    private int cookingTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createdDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
