@@ -152,6 +152,10 @@ public class OrderServiceIml implements OrderService{
     public Order acceptOrderByCourier(Long orderID) {
         Order order = getByID(orderID);
         Courier courier = courierService.getByAuthenticatedUser();
+
+        // update available status for courier
+        courier = courierService.updateAvailableForAuthCourier(false);
+
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to accept the order");
         }
@@ -160,9 +164,6 @@ public class OrderServiceIml implements OrderService{
         }
         order.setStatus(OrderStatus.COURIER_ACCEPTED);
         orderRepos.save(order);
-
-        // update available status for courier
-        courierService.updateAvailableForAuthCourier(false);
         return order;
     }
 
@@ -221,7 +222,7 @@ public class OrderServiceIml implements OrderService{
             order.setStatus(OrderStatus.COMPLETED);
             
             // update available status for courier
-            courierService.updateAvailableForAuthCourier(false);
+            courierService.updateAvailableForAuthCourier(true);
             return orderRepos.save(order);
         } else {
             throw new BadResultException("cannot make completed confirmation");
