@@ -114,5 +114,13 @@ public class Restaurant {
         this.rating = rating;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurant [id=" + id + ", name=" + name + ", address=" + address + ", zipcode=" + zipcode + ", city="
+                + city + ", rating=" + rating + ", longitude=" + longitude + ", latitude=" + latitude + ", imageurl="
+                + imageurl + ", cookingTime=" + cookingTime + ", owner=" + owner + ", createdDate=" + createdDate
+                + ", updatedDate=" + updatedDate + "]";
+    }
+
     
 }

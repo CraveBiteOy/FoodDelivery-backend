@@ -10,6 +10,7 @@ public interface RestaurantService {
     Restaurant save(RestaurantRequest req);
     Restaurant update(Long id, String name,  String imageurl);
     Restaurant getById(Long id);
+    RestaurantResponse getByIdAndAuthenticatedCustomer(Long id);
     Restaurant getByName(String name);
     Restaurant updateReview(Long id, int rating);
     List<RestaurantResponse> getRestauranstsByDistanceOfCustomer();

@@ -29,6 +29,8 @@ import com.fooddelivery.backend.Utils.GeoCoding;
 @Service
 public class RestaurantServiceIml implements RestaurantService {
 
+    private final double fixedTimeForOneKilometer = 5;
+
     @Autowired
     UserService userService;
     @Autowired
@@ -70,6 +72,24 @@ public class RestaurantServiceIml implements RestaurantService {
     }
 
     @Override
+    public RestaurantResponse getByIdAndAuthenticatedCustomer(Long id) {
+       Optional<Restaurant> entity = restaurantRepos.findById(id);
+        if(!entity.isPresent()) {
+            throw new EntityNotFoundException("the restaurant not found");
+        }
+        Restaurant restaurant = entity.get();
+        System.out.println(restaurant);
+        RestaurantResponse res = restaurantMapper.mapRestaurantToResponse(restaurant);
+        Customer customer = customerService.getByAuthenticatedUser();
+        double distance = calculateDistance(customer, restaurant);
+        res.setDistance(distance);
+        int estimatedTime = restaurant.getCookingTime() + (int) Math.round(distance * fixedTimeForOneKilometer);
+        res.setEstimatedTime(estimatedTime);
+        System.out.println("distance " + distance + ", estimatedTime: " + estimatedTime);
+        return res;
+    }
+
+    @Override
     public Restaurant updateReview(Long id, int rating) {
         Restaurant restaurant = getById(id);
         if(restaurant.getRating() == null) {
@@ -103,6 +123,7 @@ public class RestaurantServiceIml implements RestaurantService {
             double distance = calculateDistance(customer, restaurant);
             RestaurantResponse res = restaurantMapper.mapRestaurantToResponse(restaurant);
             res.setDistance(distance);
+            res.setEstimatedTime(restaurant.getCookingTime() + (int) Math.round(distance * fixedTimeForOneKilometer));
             return res;
         }).collect(Collectors.toList());
         return recommendRestaurants;

@@ -33,4 +33,5 @@ public class RestaurantResponse {
     private LocalDateTime updatedDate;
     // private List<DishResponse> dishes = new ArrayList<>();
     private double distance;
+    private int estimatedTime;
 }
