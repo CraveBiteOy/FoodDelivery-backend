@@ -7,6 +7,6 @@ public interface BasketService {
     Basket getByCustomerAndRestaurant(Long customerId, Long restaurantId);
     Basket getById(Long id);
     Basket addDishToBasket(Long dishId, int quantity, Long basketId);
-    Basket removeDishFromBasket(Long basketDishId);
+    Basket removeBasketDishFromBasket(Long basketDishId);
     Basket removeAllDishesFromBasket(Long id);
 }

@@ -47,18 +47,18 @@ public class BasketController {
         BasketResponse res = basketMapper.mapBasketToResponse(basketService.getByCustomerAndRestaurant(customerId, restaurantId));
         return new ResponseEntity<BasketResponse>(res, HttpStatus.OK);
     }
-     // add dish to basket
-    @PutMapping("/basket/{basketId}/dish/{dishId}/quantity/{quantity}")
-    public ResponseEntity<BasketResponse> addDish(@PathVariable Long basketId, @PathVariable Long dishId, @PathVariable int quantity) {
-        BasketResponse res = basketMapper.mapBasketToResponse(basketService.addDishToBasket(dishId, quantity, basketId));
-        return new ResponseEntity<BasketResponse>(res, HttpStatus.OK);
-    }
-     // remove dish from basket
-    @PutMapping("/remove/basketDish/{basketDishId}/")
-    public ResponseEntity<BasketResponse> removeDish(@PathVariable Long basketDishId) {
-        BasketResponse res = basketMapper.mapBasketToResponse(basketService.removeDishFromBasket(basketDishId));
-        return new ResponseEntity<BasketResponse>(res, HttpStatus.OK);
-    }
+    //  // add dish to basket
+    // @PutMapping("/basket/{basketId}/dish/{dishId}/quantity/{quantity}")
+    // public ResponseEntity<BasketResponse> addDish(@PathVariable Long basketId, @PathVariable Long dishId, @PathVariable int quantity) {
+    //     BasketResponse res = basketMapper.mapBasketToResponse(basketService.addDishToBasket(dishId, quantity, basketId));
+    //     return new ResponseEntity<BasketResponse>(res, HttpStatus.OK);
+    // }
+    //  // remove dish from basket
+    // @PutMapping("/remove/basketDish/{basketDishId}/")
+    // public ResponseEntity<BasketResponse> removeDish(@PathVariable Long basketDishId) {
+    //     BasketResponse res = basketMapper.mapBasketToResponse(basketService.removeBasketDishFromBasket(basketDishId));
+    //     return new ResponseEntity<BasketResponse>(res, HttpStatus.OK);
+    // }
      // remove all dishes from basket
     @PutMapping("/remove/all/basket/{id}")
     public ResponseEntity<BasketResponse> removeAll(@PathVariable Long id) {

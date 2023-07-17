@@ -35,21 +35,33 @@ public class BasketDishServiceIml implements BasketDishService {
 
             // update basket
             basket.getBasketDishes().add(basketDish);
-            basket.setQuantity(quantity);
-            basket.setTotal(quantity * dish.getPrice());
+            basket.setQuantity(basket.getQuantity() + quantity);
+            basket.setTotal(basket.getTotal() + (quantity * dish.getPrice()));
             basketRepos.save(basket);
 
             return basketDish;
         } else {
             BasketDish basketDish = entity.get();
-            basketDish.setQuantity(basketDish.getQuantity() + quantity);
 
-            // update basket
-            basket.setQuantity(basket.getQuantity() + quantity);
-            basket.setTotal(basket.getTotal() + (quantity * dish.getPrice()));
-            basketRepos.save(basket);
-            return basketDishRepos.save(basketDish);
+            return update(basketDish.getId(), quantity);
         }
+    }
+
+    @Override
+    public BasketDish update(Long basketDishID, int quantity) {
+        BasketDish basketDish = getById(basketDishID);
+        Dish dish = basketDish.getDish();
+        Basket basket = basketDish.getBasket();
+
+         // reset basket
+        basket.setTotal(basket.getTotal() - (basketDish.getQuantity() * dish.getPrice()) + (quantity * dish.getPrice()));
+        basket.setQuantity(basket.getQuantity() - basketDish.getQuantity() + quantity);
+        basketRepos.save(basket);
+
+        basketDish.setQuantity(quantity);
+        basketDish = basketDishRepos.save(basketDish);
+
+        return basketDish;
     }
 
     @Override
@@ -58,7 +70,7 @@ public class BasketDishServiceIml implements BasketDishService {
         Basket basket = findBasketByid(basketId);
         Optional<BasketDish> entity = basketDishRepos.findByDishAndBasket(dish, basket);
          if(!entity.isPresent()) {
-            throw new EntityNotFoundException("the basket dish not found");
+            return null;
         } else {
             BasketDish basketDish = entity.get();
             return basketDish;
@@ -89,6 +101,8 @@ public class BasketDishServiceIml implements BasketDishService {
 
         basketDishRepos.delete(basketDish);
     }
+
+    
 
     @Override
     public List<BasketDish> getByBasket(Long basketId) {

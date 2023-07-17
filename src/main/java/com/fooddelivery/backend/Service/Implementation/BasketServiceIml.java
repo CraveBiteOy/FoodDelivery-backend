@@ -84,12 +84,13 @@ public class BasketServiceIml implements BasketService{
 
   
     @Override
-    public Basket removeDishFromBasket(Long basketDishId) {
+    public Basket removeBasketDishFromBasket(Long basketDishId) {
         BasketDish basketDish = basketDishService.getById(basketDishId);
         Basket basket = basketDish.getBasket();
         basketDishService.removeBasketDish(basketDishId);
         return getById(basket.getId());
     }
+
 
     @Override
     public Basket removeAllDishesFromBasket(Long id) {
