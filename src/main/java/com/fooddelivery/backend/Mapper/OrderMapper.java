@@ -30,6 +30,8 @@ public class OrderMapper {
         OrderResponse res = new OrderResponse(order.getId(), customerMapper.mapCustomerToResponse(order.getCustomer()), restaurantMapper.mapRestaurantToResponse(order.getRestaurant()), order.getStatus(), order.getTotal(), order.getDeliveryFee(), order.getFinalPrice(), order.getQuantity(), order.getNote(), order.getToLongitude(), order.getToLatitude(), order.getFromLongitude(), order.getFromLatitude(), order.getCreatedDate(), order.getUpdatedDate());
         res.setTotalTime(order.getTotalTime());
         res.setD2Distance(order.getD2Distance());
+        res.setDropOffTime(order.getDropOffTime());
+        res.setPickedupTime(order.getPickedupTime());
         if(order.getCourier() != null) {
             res.setCourier(courierMapper.mapCourierToResponse(order.getCourier()));
         }

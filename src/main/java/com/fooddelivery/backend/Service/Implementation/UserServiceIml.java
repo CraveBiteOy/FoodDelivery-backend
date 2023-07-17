@@ -35,6 +35,8 @@ import com.fooddelivery.backend.Models.Response.UserResponse;
 import com.fooddelivery.backend.Repository.UserRepos;
 import com.fooddelivery.backend.Security.SecurityConstant;
 import com.fooddelivery.backend.Service.UserService;
+import com.fooddelivery.backend.Utils.GeoCoding;
+
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -46,6 +48,8 @@ public class UserServiceIml implements UserService, UserDetailsService {
     UserMapper userMapper;
     @Autowired
     HttpServletResponse response;
+    @Autowired
+    GeoCoding geoCoding;
     
 
     @Override
@@ -175,5 +179,20 @@ public class UserServiceIml implements UserService, UserDetailsService {
         UserResponse res = userMapper.mapUserToResponse(authUser);
         return res;
         
+    }
+
+    @Override
+    public Users updateByCoordinate(Double longitude, Double latitude) {
+        Users authUser = getAuthUser();
+        authUser.setLatitude(latitude);
+        authUser.setLongitude(longitude);
+        return userRepos.save(authUser);
+    }
+
+    @Override
+    public Users updateByTextAddress(String address, String zipcode, String city) {
+        Users authUser = getAuthUser();
+        authUser = geoCoding.geoLocationEncode(authUser, address, zipcode, city);
+         return userRepos.save(authUser);
     }
 }

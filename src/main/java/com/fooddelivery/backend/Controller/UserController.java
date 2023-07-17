@@ -51,5 +51,17 @@ public class UserController {
         return new ResponseEntity<UserResponse>(userService.saveUser(userSignup), HttpStatus.CREATED);
     }
 
+    @PutMapping("/update/longitude/{longitude}/latitude/{latitude}")
+    public ResponseEntity<UserResponse> updateByCoordinate(@PathVariable Double longitude, @PathVariable Double latitude) {
+        Users user = userService.updateByCoordinate(longitude, latitude);
+        return new ResponseEntity<UserResponse>(userMapper.mapUserToResponse(user), HttpStatus.OK);
+    }
+
+    @PutMapping("/update/zipcode/{zipcode}/city/{city}/address/{address}")
+    public ResponseEntity<UserResponse> updateByCoordinate(@PathVariable String zipcode, @PathVariable String city, @PathVariable String address) {
+        Users user = userService.updateByTextAddress(address, zipcode, city);
+        return new ResponseEntity<UserResponse>(userMapper.mapUserToResponse(user), HttpStatus.OK);
+    }
+
    
 }

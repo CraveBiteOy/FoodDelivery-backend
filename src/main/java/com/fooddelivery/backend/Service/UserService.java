@@ -14,4 +14,6 @@ public interface UserService {
     UserResponse signIn(UserSignIn userSignIn);
     UserResponse loadAuthUserRes();
     Users getAuthUser();
+    Users updateByTextAddress(String address, String zipcode, String city);
+    Users updateByCoordinate(Double longitude, Double latitude);
 }

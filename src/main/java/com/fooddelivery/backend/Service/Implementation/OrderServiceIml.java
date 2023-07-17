@@ -103,8 +103,11 @@ public class OrderServiceIml implements OrderService{
         order.setFinalPrice(order.getTotal() + order.getDeliveryFee());
         order.setD2Distance(distance);
 
-        order.setTotalTime(restaurant.getCookingTime() + (int) Math.round(distance * fixedTimeForOneKilometer));
-
+        int dropOffTime =  (int) Math.round(distance * fixedTimeForOneKilometer);
+        // order.setTotalTime(restaurant.getCookingTime() + (int) Math.round(distance * fixedTimeForOneKilometer));
+        order.setTotalTime(restaurant.getCookingTime() + dropOffTime);
+        order.setDropOffTime(dropOffTime);
+        order.setPickedupTime(restaurant.getCookingTime());
         final Order finalOrder = orderRepos.save(order);
 
         // create orderDishes from basketDishes in the basket
@@ -129,13 +132,15 @@ public class OrderServiceIml implements OrderService{
     }
 
 
-
+    // the owner accept the order, and the server simultaneously matches the courier for the server
     @Override
     public Order acceptOrderByOwner(Long orderID) {
-       Order order = getAndCheckOrderForOwner(orderID, OrderStatus.NEW);
-       order.setStatus(OrderStatus.COOKING);
-       order = orderRepos.save(order);
-       return order;
+        Order order = getAndCheckOrderForOwner(orderID, OrderStatus.NEW);
+        order.setStatus(OrderStatus.COOKING);
+        Courier courier = reachCourier(order);
+        order.setCourier(courier);
+        order = orderRepos.save(order);
+        return order;
     }
 
     @Override
@@ -146,13 +151,13 @@ public class OrderServiceIml implements OrderService{
         return order;
     }
 
-    // after the order cooking is finished and is ready for being picked up, the server will search for a courier and send him a notification about rejecting or accepting the order
+    // after the order cooking is finished and is ready for being picked up
     @Override
     public Order finishCookingByOwner(Long orderID) {
         Order order = getAndCheckOrderForOwner(orderID, OrderStatus.COOKING);
         order.setStatus(OrderStatus.READY_FOR_PICKUP);
-        Courier courier = reachCourier(order);
-        order.setCourier(courier);
+        // Courier courier = reachCourier(order);
+        // order.setCourier(courier);
         order = orderRepos.save(order);
         return order;
     }

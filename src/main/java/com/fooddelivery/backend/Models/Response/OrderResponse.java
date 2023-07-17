@@ -29,6 +29,8 @@ public class OrderResponse {
     private double d2Distance;
     private int totalTime;
     // pickedupTime and dropOffTime
+    private int pickedupTime;
+    private int dropOffTime;
     // moving the matching courier to the owener-accepting stage
     private Double toLongitude;
     private Double toLatitude;

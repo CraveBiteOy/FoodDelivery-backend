@@ -67,6 +67,14 @@ public class Order {
     @Column(name = "total_time")
     private int totalTime;
 
+    @Min(value = 0, message = "drop_off_time must be higher than 0")
+    @Column(name = "drop_off_time")
+    private int dropOffTime;
+
+    @Min(value = 0, message = "pickedup_time must be higher than 0")
+    @Column(name = "pickedup_time")
+    private int pickedupTime;
+
     @Min(value = 0, message = "quantity must be higher than 0")
     @Column(name = "quantity")
     private int quantity;
