@@ -87,7 +87,7 @@ public class OrderServiceIml implements OrderService{
         }
 
         // create new order 
-        Order order = new Order(customer, restaurant, OrderStatus.NEW, basket.getTotal(), basket.getQuantity(), req.getToLongitude(), req.getToLatitude());
+        Order order = new Order(customer, restaurant, OrderStatus.NEW, basket.getTotal(), basket.getQuantity(), req.getToLongitude(), req.getToLatitude(), req.getAddress(), req.getZipcode(), req.getCity());
         if(req.getNote() != null) {
             order.setNote(req.getNote());
         }

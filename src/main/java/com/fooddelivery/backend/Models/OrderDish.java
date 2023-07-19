@@ -27,7 +27,7 @@ public class OrderDish {
     private Long id;
 
     @Min(value = 0, message = "price must be higher than 0")
-    @Column(name = "quantity", nullable = false, unique = true)
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -31,11 +31,11 @@ public class Basket {
     private Customer customer;
 
     @Min(value = 0, message = "total must be higher than 0")
-    @Column(name = "total", nullable = false, unique = true)
+    @Column(name = "total", nullable = false)
     private Double total;
 
     @Min(value = 0, message = "quantity must be higher than 0")
-    @Column(name = "quantity", nullable = false, unique = true)
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
 

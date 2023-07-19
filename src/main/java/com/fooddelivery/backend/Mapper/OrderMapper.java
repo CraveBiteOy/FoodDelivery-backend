@@ -27,7 +27,7 @@ public class OrderMapper {
 
     public OrderResponse mapOrderToResponse(Order order) {
         
-        OrderResponse res = new OrderResponse(order.getId(), customerMapper.mapCustomerToResponse(order.getCustomer()), restaurantMapper.mapRestaurantToResponse(order.getRestaurant()), order.getStatus(), order.getTotal(), order.getDeliveryFee(), order.getFinalPrice(), order.getQuantity(), order.getNote(), order.getToLongitude(), order.getToLatitude(), order.getFromLongitude(), order.getFromLatitude(), order.getCreatedDate(), order.getUpdatedDate());
+        OrderResponse res = new OrderResponse(order.getId(), customerMapper.mapCustomerToResponse(order.getCustomer()), restaurantMapper.mapRestaurantToResponse(order.getRestaurant()), order.getStatus(), order.getTotal(), order.getDeliveryFee(), order.getFinalPrice(), order.getQuantity(), order.getNote(), order.getToLongitude(), order.getToLatitude(), order.getFromLongitude(), order.getFromLatitude(), order.getCreatedDate(), order.getUpdatedDate(), order.getAddress(), order.getZipcode(), order.getCity());
         res.setTotalTime(order.getTotalTime());
         res.setD2Distance(order.getD2Distance());
         res.setDropOffTime(order.getDropOffTime());

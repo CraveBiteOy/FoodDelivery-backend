@@ -36,12 +36,14 @@ public class OrderResponse {
     private Double toLatitude;
     private Double fromLongitude;
     private Double fromLatitude;
+    private String address;
+    private String zipcode;
+    private String city;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createdDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime updatedDate;
-    public OrderResponse(Long id, CustomerResponse customer, RestaurantResponse restaurant, OrderStatus status, double total, double deliveryFee, double finalPrice, int quantity, String note, Double toLongitude, Double toLatitude, Double fromLongitude,
-            Double fromLatitude, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public OrderResponse(Long id, CustomerResponse customer, RestaurantResponse restaurant, OrderStatus status, double total, double deliveryFee, double finalPrice, int quantity, String note, Double toLongitude, Double toLatitude, Double fromLongitude, Double fromLatitude, LocalDateTime createdDate, LocalDateTime updatedDate, String address, String zipcode, String city) {
         this.id = id;
         this.customer = customer;
         this.restaurant = restaurant;
@@ -57,6 +59,9 @@ public class OrderResponse {
         this.fromLatitude = fromLatitude;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
+        this.city = city;
+        this.address = address;
+        this.zipcode = zipcode;
     }
 
     

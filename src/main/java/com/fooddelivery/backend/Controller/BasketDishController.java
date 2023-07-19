@@ -39,9 +39,13 @@ public class BasketDishController {
     }
     // get basket dish by dish Id and basket Id
     @GetMapping("/dish/{dishId}/basket/{basketId}")
-    public ResponseEntity<BasketDishResponse> getByDishAndBasket(@PathVariable Long dishId, @PathVariable Long basketId) {
-        BasketDishResponse res = basketDishMapper.mapBasketDishToResponse(basketDishService.getByDishAndBasket(dishId, basketId));
-        return new ResponseEntity<BasketDishResponse>(res, HttpStatus.OK);
+    public ResponseEntity<Object> getByDishAndBasket(@PathVariable Long dishId, @PathVariable Long basketId) {
+        BasketDish basketDish = basketDishService.getByDishAndBasket(dishId, basketId);
+        if(basketDish != null) {
+            BasketDishResponse res = basketDishMapper.mapBasketDishToResponse(basketDish);
+            return new ResponseEntity<Object>(res, HttpStatus.OK);
+        }
+        return new ResponseEntity<Object>(null, HttpStatus.OK);
     }
 
     // get list of basket dishes by basket Id

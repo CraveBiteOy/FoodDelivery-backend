@@ -94,6 +94,15 @@ public class Order {
     @Column(name = "from_latitude")
     private Double fromLatitude;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "zipcode")
+    private String zipcode;
+
+    @Column(name = "city")
+    private String city;
+
     @JsonIgnore
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderDish> orderDishes = new ArrayList<>();
@@ -116,7 +125,7 @@ public class Order {
         this.total = 0;
     }
 
-    public Order(Customer customer, Restaurant restaurant, OrderStatus status, double total, int quantity, Double toLongitude, Double toLatitude) {
+    public Order(Customer customer, Restaurant restaurant, OrderStatus status, double total, int quantity, Double toLongitude, Double toLatitude, String address, String zipcode, String city) {
         this.customer = customer;
         this.restaurant = restaurant;
         this.status = status;
@@ -124,6 +133,9 @@ public class Order {
         this.quantity = quantity;
         this.toLongitude = toLongitude;
         this.toLatitude = toLatitude;
+        this.city = city;
+        this.address = address;
+        this.zipcode = zipcode;
     }
 
     
