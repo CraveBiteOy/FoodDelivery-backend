@@ -15,6 +15,7 @@ public interface OrderService {
     List<Order> getByCourierAndStatus(Long courierID,  OrderStatus status);
     Order getByID(Long orderID);
     Order create(OrderRequest req);
+    Order reOrder(Long preOrderID);
     Order acceptOrderByOwner(Long orderID);
     Order rejectOrderByOwner(Long orderID);
     Order finishCookingByOwner(Long orderID);

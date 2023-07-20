@@ -28,6 +28,7 @@ import com.fooddelivery.backend.Service.BasketDishService;
 import com.fooddelivery.backend.Service.BasketService;
 import com.fooddelivery.backend.Service.CourierService;
 import com.fooddelivery.backend.Service.CustomerService;
+import com.fooddelivery.backend.Service.OrderDishService;
 import com.fooddelivery.backend.Service.OrderService;
 import com.fooddelivery.backend.Service.OwnerService;
 import com.fooddelivery.backend.Service.RestaurantService;
@@ -68,6 +69,8 @@ public class OrderServiceIml implements OrderService{
     BasketDishRepos basketDishRepos;
     @Autowired
     BasketRepos basketRepos;
+    @Autowired
+    OrderDishService orderDishService;
   
 
     @Override
@@ -129,6 +132,49 @@ public class OrderServiceIml implements OrderService{
         basketRepos.save(basket);
 
         return finalOrder;
+    }
+
+    // make new order from the previous order
+    @Override
+    public Order reOrder(Long preOrderID) {
+        Order preOrder =  getByID(preOrderID);
+        Users authUser = userService.getAuthUser();
+
+        if(authUser.getId() != preOrder.getCustomer().getUser().getId()) {
+            throw new BadResultException("is not authorized to place an order because the authenticated user is not the customer of the basket");
+        }
+
+        Order newOrder = Order.builder()
+                            .customer(preOrder.getCustomer())
+                            .restaurant(preOrder.getRestaurant())      
+                            .status(OrderStatus.NEW)
+                            .total(preOrder.getTotal())
+                            .deliveryFee(preOrder.getDeliveryFee())
+                            .finalPrice(preOrder.getFinalPrice())
+                            .totalTime(preOrder.getTotalTime())
+                            .d2Distance(preOrder.getD2Distance())
+                            .dropOffTime(preOrder.getDropOffTime())
+                            .pickedupTime(preOrder.getPickedupTime())
+                            .quantity(preOrder.getQuantity())
+                            .note(preOrder.getNote())
+                            .toLatitude(preOrder.getToLatitude())
+                            .toLongitude(preOrder.getToLongitude())
+                            .fromLatitude(preOrder.getRestaurant().getLatitude())
+                            .fromLongitude(preOrder.getRestaurant().getLongitude())
+                            .address(preOrder.getAddress())
+                            .zipcode(preOrder.getZipcode())
+                            .city(preOrder.getCity())
+                            .build();
+        final Order finalOrder = orderRepos.save(newOrder);
+
+        // get order dishes from the previous order, and turn them into new order dishes in the new order
+        List<OrderDish> preItems = orderDishService.getListByOrder(preOrderID);
+        preItems.forEach(item -> {
+            OrderDish orderDish = new OrderDish(item.getQuantity(), item.getDish(), finalOrder);
+            orderDishRepos.save(orderDish);
+        });
+
+        return newOrder;
     }
 
 

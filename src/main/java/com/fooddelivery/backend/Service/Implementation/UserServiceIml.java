@@ -1,5 +1,6 @@
 package com.fooddelivery.backend.Service.Implementation;
 
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import com.fooddelivery.backend.Exception.EntityNotFoundException;
 import com.fooddelivery.backend.Mapper.UserMapper;
 import com.fooddelivery.backend.Models.Users;
 import com.fooddelivery.backend.Models.Enums.Role;
+import com.fooddelivery.backend.Models.Request.PasswordForm;
 import com.fooddelivery.backend.Models.Request.UserSignIn;
 import com.fooddelivery.backend.Models.Request.UserSignUp;
 import com.fooddelivery.backend.Models.Response.UserResponse;
@@ -194,5 +196,36 @@ public class UserServiceIml implements UserService, UserDetailsService {
         Users authUser = getAuthUser();
         authUser = geoCoding.geoLocationEncode(authUser, address, zipcode, city);
          return userRepos.save(authUser);
+    }
+
+    @Override
+    public UserResponse updatePassword(PasswordForm passwordForm) {
+        // String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        // String username = authUser.getUsername();
+        Users user = getAuthUser();
+        if(!passwordForm.getNewPassword().equals(passwordForm.getConfirmPassword())) {
+         throw new BadResultException("new password dont match");
+        }
+        if(!new BCryptPasswordEncoder().matches(passwordForm.getPassword(), user.getPassword())) {
+         throw new BadResultException("password is wrong");
+        }
+        user.setPassword(new BCryptPasswordEncoder().encode(passwordForm.getNewPassword()));
+        userRepos.save(user);
+        return userMapper.mapUserToResponse(user);
+    }
+
+    @Override
+    public UserResponse updateProfile(String firstname, String surename) {
+           Users auth = getAuthUser();
+            if(firstname != null && firstname.length() > 0) {
+                auth.setFirstname(firstname);
+            }
+            if(surename != null && surename.length() > 0) {
+                auth.setSurename(surename);
+            }
+            userRepos.save(auth);
+            UserResponse res = userMapper.mapUserToResponse(auth);
+            System.out.println(res);
+            return res;
     }
 }

@@ -111,6 +111,21 @@ public class OrderController {
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.CREATED);
     }
+
+    // create new order from previous order
+    @PostMapping("/reorder/previousOrder/{preOrderID}")
+    public ResponseEntity<OrderResponse> createReOrder(@PathVariable Long preOrderID) {
+        Order order = orderService.reOrder(preOrderID);
+        OrderResponse res = orderMapper.mapOrderToResponse(order);
+
+        // restaurant owner subscribe this websocket link to keep tracking the order data in real time
+        simpMessagingTemplate.convertAndSend("/owner/" + order.getRestaurant().getOwner().getId(), res);
+
+        // the customer subscribe this websocket link to keep tracking the order data in real time
+        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+
+        return new ResponseEntity<OrderResponse>(res, HttpStatus.CREATED);
+    }
     
     //  // create new order
     // @PostMapping("/order")

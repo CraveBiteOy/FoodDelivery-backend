@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fooddelivery.backend.Mapper.UserMapper;
 import com.fooddelivery.backend.Models.Users;
+import com.fooddelivery.backend.Models.Request.PasswordForm;
 import com.fooddelivery.backend.Models.Request.UserSignIn;
 import com.fooddelivery.backend.Models.Request.UserSignUp;
 import com.fooddelivery.backend.Models.Response.UserResponse;
@@ -63,5 +64,12 @@ public class UserController {
         return new ResponseEntity<UserResponse>(userMapper.mapUserToResponse(user), HttpStatus.OK);
     }
 
-   
+    @PutMapping("/authUser/updateProfile")
+    public ResponseEntity<UserResponse> removeImage(@RequestParam(required = false) String firstname, @RequestParam(required = false) String surename) {
+        return new ResponseEntity<UserResponse>(userService.updateProfile(firstname, surename), HttpStatus.OK);
+    }
+    @PutMapping("/authUser/updatePassword")
+    public ResponseEntity<UserResponse> updatePassword(@Valid @RequestBody PasswordForm passwordForm) {
+        return new ResponseEntity<UserResponse>(userService.updatePassword(passwordForm), HttpStatus.OK);
+    }
 }
