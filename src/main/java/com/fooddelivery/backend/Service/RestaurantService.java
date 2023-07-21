@@ -16,4 +16,6 @@ public interface RestaurantService {
     List<RestaurantResponse> getRestauranstsByDistanceOfCustomer();
     List<Restaurant> getAll();
     List<Restaurant> getByOwner(Long ownerId);
+    Restaurant getFirstRestaurantForAuthOwner();
+    Boolean checkRestaurantsOfAuthOwner();
 }

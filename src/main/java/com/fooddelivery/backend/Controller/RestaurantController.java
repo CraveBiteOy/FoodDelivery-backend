@@ -76,6 +76,19 @@ public class RestaurantController {
         return new ResponseEntity<List<RestaurantResponse>>(res, HttpStatus.OK);
     }
 
+     // get the first restaurant for the authenticated owner
+    @GetMapping("/authenticatedOwner/firstRestaurant")
+    public ResponseEntity<RestaurantResponse> getFirstRestaurantForAuthOwner() {
+        RestaurantResponse res = restaurantMapper.mapRestaurantToResponse(restaurantService.getFirstRestaurantForAuthOwner());
+        return new ResponseEntity<RestaurantResponse>(res, HttpStatus.OK);
+    }
+
+     // check whether the authenticated owner has any restaurant or not
+    @GetMapping("/authenticatedOwner/checkRestaurants")
+    public ResponseEntity<Boolean> checkRestaurantsOfAuthOwner() {
+        return new ResponseEntity<Boolean>(restaurantService.checkRestaurantsOfAuthOwner(), HttpStatus.OK);
+    }
+
      //get all recommended restaurants for the authenticated customers based on his current location within 20km
     @GetMapping("/recommendation")
     public ResponseEntity<List<RestaurantResponse>> getRecommendation() {

@@ -61,6 +61,32 @@ public class RestaurantServiceIml implements RestaurantService {
         return restaurantRepos.findByOwner(owner);
     }
 
+     
+
+    @Override
+    public Restaurant getFirstRestaurantForAuthOwner() {
+        Owner owner = ownerService.getOwnerByAuthenticatedUser();
+        List<Restaurant> restaurants = restaurantRepos.findByOwner(owner);
+        if(restaurants.size() > 0) {
+            return restaurants.get(0);
+        } else {
+            throw new EntityNotFoundException("the owner does not have any restaurant");
+        }
+    }
+
+    
+
+    @Override
+    public Boolean checkRestaurantsOfAuthOwner() {
+        Owner owner = ownerService.getOwnerByAuthenticatedUser();
+        List<Restaurant> restaurants = restaurantRepos.findByOwner(owner);
+        if(restaurants.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public Restaurant getById(Long id) {
         Optional<Restaurant> entity = restaurantRepos.findById(id);
