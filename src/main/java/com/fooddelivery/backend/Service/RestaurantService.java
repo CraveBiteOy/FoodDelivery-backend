@@ -8,7 +8,7 @@ import com.fooddelivery.backend.Models.Response.RestaurantResponse;
 
 public interface RestaurantService {
     Restaurant save(RestaurantRequest req);
-    Restaurant update(Long id, String name,  String imageurl);
+    Restaurant update(Long id, String name,  String imageurl, Integer cookingTime);
     Restaurant getById(Long id);
     RestaurantResponse getByIdAndAuthenticatedCustomer(Long id);
     Restaurant getByName(String name);

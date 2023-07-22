@@ -56,6 +56,22 @@ public class OrderController {
         return new ResponseEntity<List<OrderResponse>>(res, HttpStatus.OK);
     }
 
+    // get in-progressing orders  by restaurant Id
+    @GetMapping("/inprogress/restaurant/{restaurantID}")
+    public ResponseEntity<List<OrderResponse>> getActiveOrdersByRestaurant(@PathVariable Long restaurantID) {
+        List<Order> orders = orderService.getByRestaurant(restaurantID); 
+        List<OrderResponse> res = orders.stream().filter(order -> !order.getStatus().equals(OrderStatus.COMPLETED)).map(order -> orderMapper.mapOrderToResponse(order)).collect(Collectors.toList());
+        return new ResponseEntity<List<OrderResponse>>(res, HttpStatus.OK);
+    }
+
+     // get completed orders  by restaurant Id
+    @GetMapping("/completed/restaurant/{restaurantID}")
+    public ResponseEntity<List<OrderResponse>> getCompletedOrdersByRestaurant(@PathVariable Long restaurantID) {
+        List<Order> orders = orderService.getByRestaurant(restaurantID); 
+        List<OrderResponse> res = orders.stream().filter(order -> order.getStatus().equals(OrderStatus.COMPLETED)).map(order -> orderMapper.mapOrderToResponse(order)).collect(Collectors.toList());
+        return new ResponseEntity<List<OrderResponse>>(res, HttpStatus.OK);
+    }
+
     // get order  by restaurant Id and order status
     @GetMapping("/restaurant/{restaurantID}/status/{status}")
     public ResponseEntity<List<OrderResponse>> getbyRestaurantAndStatus(@PathVariable Long restaurantID, @PathVariable OrderStatus status) {

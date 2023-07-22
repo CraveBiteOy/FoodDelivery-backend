@@ -172,13 +172,20 @@ public class RestaurantServiceIml implements RestaurantService {
     }
 
     @Override
-    public Restaurant update(Long id,String name,  String imageurl) {
+    public Restaurant update(Long id,String name,  String imageurl,  Integer cookingTime) {
         Restaurant restaurant = getById(id);
+        Users authUser = userService.getAuthUser();
+        if(authUser.getId() != restaurant.getOwner().getUser().getId()) {
+            throw new BadResultException("not authorized to update the restaurant");
+        }
         if(name != null && name.length() > 0 && !name.equals(restaurant.getName())) {
             restaurant.setName(name);
         }
         if(imageurl != null && imageurl.length() > 0 && !imageurl.equals(restaurant.getImageurl())) {
             restaurant.setImageurl(imageurl);
+        }
+        if(cookingTime != null) {
+            restaurant.setCookingTime(cookingTime);
         }
         return restaurantRepos.save(restaurant);
     }

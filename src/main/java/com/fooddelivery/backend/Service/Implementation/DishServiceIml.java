@@ -68,7 +68,7 @@ public class DishServiceIml implements DishService {
     }
 
     @Override
-    public Dish update(long dishId, String name, String description, Double price, String imageurl) {
+    public Dish update(long dishId, String name, String description, Double price, String imageurl, Boolean availability) {
         Dish dish = getById(dishId);
         Restaurant restaurant = dish.getRestaurant();
         checkIsOwnerOfRestaurant(restaurant);
@@ -83,6 +83,9 @@ public class DishServiceIml implements DishService {
         }
         if(imageurl != null && imageurl.length() > 0) {
             dish.setImageurl(imageurl);
+        }
+        if(availability != null) {
+            dish.setAvailability(availability);
         }
         return dishRepos.save(dish);
     }

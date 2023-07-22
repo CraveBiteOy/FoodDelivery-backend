@@ -53,8 +53,8 @@ public class DishController {
     }
     // update dish by by dish Id
     @PutMapping("/dish/{id}")
-    public ResponseEntity<DishResponse> update(@PathVariable Long id, @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) Double price, @RequestParam(required = false) String imageurl) {
-        DishResponse res = dishMapper.mapDishToResponse(dishService.update(id, name, description, price, imageurl));
+    public ResponseEntity<DishResponse> update(@PathVariable Long id, @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) Double price, @RequestParam(required = false) String imageurl, @RequestParam(required = false) Boolean availability) {
+        DishResponse res = dishMapper.mapDishToResponse(dishService.update(id, name, description, price, imageurl, availability));
         return new ResponseEntity<DishResponse>(res, HttpStatus.OK);
     }
     // update the available status of dish (true or false)

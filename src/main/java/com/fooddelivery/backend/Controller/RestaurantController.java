@@ -109,8 +109,8 @@ public class RestaurantController {
 
      // update restaurant by restaurant id for new name or new image url
     @PutMapping("/restaurant/id/{id}")
-    public ResponseEntity<RestaurantResponse> update(@PathVariable Long id, @RequestParam(required = false) String name, @RequestParam(required = false) String imageurl) {
-        RestaurantResponse res = restaurantMapper.mapRestaurantToResponse(restaurantService.update(id, name != null ? name : null, imageurl != null ? imageurl : null));
+    public ResponseEntity<RestaurantResponse> update(@PathVariable Long id, @RequestParam(required = false) String name, @RequestParam(required = false) String imageurl, @RequestParam(required = false) Integer cookingTime) {
+        RestaurantResponse res = restaurantMapper.mapRestaurantToResponse(restaurantService.update(id, name != null ? name : null, imageurl != null ? imageurl : null, cookingTime));
         return new ResponseEntity<RestaurantResponse>(res, HttpStatus.OK);
     }
 

@@ -71,6 +71,10 @@ public class BackendApplication {
 			userRepos.save(bo2);
 			userRepos.save(my2);
 
+			Users quan3 = new Users("quan3", new BCryptPasswordEncoder().encode("123456"), "quan3", "doan",   65.011121, 25.4734533);
+			quan3.getRoles().add(Role.USER);
+			userRepos.save(quan3);
+
 			Courier courier1 = new Courier(hairj, NavigationMode.CAR);
 			courier1.setStatus(CourierStatus.ONLINE);
 			courier1.setAvailable(true);
