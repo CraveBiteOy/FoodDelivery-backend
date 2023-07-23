@@ -181,7 +181,10 @@ public class OrderServiceIml implements OrderService{
     // the owner accept the order, and the server simultaneously matches the courier for the server
     @Override
     public Order acceptOrderByOwner(Long orderID) {
-        Order order = getAndCheckOrderForOwner(orderID, OrderStatus.NEW);
+        Order order = getAndCheckOrderForOwner(orderID);
+         if(!order.getStatus().equals(OrderStatus.NEW)) {
+            throw new BadResultException("the order status is wrong");
+        }
         order.setStatus(OrderStatus.COOKING);
         Courier courier = reachCourier(order);
         order.setCourier(courier);
@@ -191,7 +194,10 @@ public class OrderServiceIml implements OrderService{
 
     @Override
     public Order rejectOrderByOwner(Long orderID) {
-        Order order = getAndCheckOrderForOwner(orderID, OrderStatus.NEW);
+        Order order = getAndCheckOrderForOwner(orderID);
+         if(!order.getStatus().equals(OrderStatus.NEW)) {
+            throw new BadResultException("the order status is wrong");
+        }
         order.setStatus(OrderStatus.OWNER_REJECTED);
         order = orderRepos.save(order);
         return order;
@@ -200,12 +206,14 @@ public class OrderServiceIml implements OrderService{
     // after the order cooking is finished and is ready for being picked up
     @Override
     public Order finishCookingByOwner(Long orderID) {
-        Order order = getAndCheckOrderForOwner(orderID, OrderStatus.COOKING);
-        order.setStatus(OrderStatus.READY_FOR_PICKUP);
-        // Courier courier = reachCourier(order);
-        // order.setCourier(courier);
-        order = orderRepos.save(order);
-        return order;
+        Order order = getAndCheckOrderForOwner(orderID);
+        if(order.getStatus().equals(OrderStatus.COURIER_ACCEPTED) || order.getStatus().equals(OrderStatus.COOKING)) {
+            order.setStatus(OrderStatus.READY_FOR_PICKUP);
+            order = orderRepos.save(order);
+            return order;
+        } else {
+            throw new BadResultException("the order status is wrong");
+        }
     }
 
     @Override
@@ -219,12 +227,13 @@ public class OrderServiceIml implements OrderService{
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to accept the order");
         }
-        if(!order.getStatus().equals(OrderStatus.READY_FOR_PICKUP)) {
+        if(order.getStatus().equals(OrderStatus.READY_FOR_PICKUP) || order.getStatus().equals(OrderStatus.COOKING)) {
+            order.setStatus(OrderStatus.COURIER_ACCEPTED);
+            orderRepos.save(order);
+            return order;
+        } else {
             throw new BadResultException("the order status is wrong");
         }
-        order.setStatus(OrderStatus.COURIER_ACCEPTED);
-        orderRepos.save(order);
-        return order;
     }
 
     // after receiving the request for rejecting the order from the current courier, the server must find out the new courier for the order and notify the order (accepting or rejecting notification) to the new courier 
@@ -235,13 +244,14 @@ public class OrderServiceIml implements OrderService{
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to reject the order");
         }
-        if(!order.getStatus().equals(OrderStatus.READY_FOR_PICKUP)) {
+        if(order.getStatus().equals(OrderStatus.READY_FOR_PICKUP) || order.getStatus().equals(OrderStatus.COOKING)) {
+            Courier newCourier = reachCourier(order);
+            order.setCourier(newCourier);
+            order = orderRepos.save(order);
+            return order;
+        } else {
             throw new BadResultException("the order status is wrong");
         }
-        Courier newCourier = reachCourier(order);
-        order.setCourier(newCourier);
-        order = orderRepos.save(order);
-        return order;
     }
 
     @Override
@@ -251,18 +261,20 @@ public class OrderServiceIml implements OrderService{
         if(courier.getId() != order.getCourier().getId()) {
             throw new BadResultException("the authenticated courier is not authorized to pick up the order");
         }
-         if(!order.getStatus().equals(OrderStatus.COURIER_ACCEPTED)) {
+         if(order.getStatus().equals(OrderStatus.COURIER_ACCEPTED) || order.getStatus().equals(OrderStatus.READY_FOR_PICKUP)) {
+            
+            // calculate the distace between restaurant and courier
+            double distance = distanceCoding.distanceCalculator(order.getFromLatitude(), courier.getUser().getLatitude(), order.getFromLongitude(), courier.getUser().getLongitude());
+            if(distance < 0.5) {
+                order.setStatus(OrderStatus.PICKED_UP);
+                return orderRepos.save(order);
+            } else {
+                throw new BadResultException("cannot make picked-up confirmation");
+            }
+        } else {
             throw new BadResultException("the order status is wrong");
         }
         
-        // calculate the distace between restaurant and courier
-        double distance = distanceCoding.distanceCalculator(order.getFromLatitude(), courier.getUser().getLatitude(), order.getFromLongitude(), courier.getUser().getLongitude());
-        if(distance < 0.5) {
-            order.setStatus(OrderStatus.PICKED_UP);
-            return orderRepos.save(order);
-        } else {
-            throw new BadResultException("cannot make picked-up confirmation");
-        }
     }
 
     @Override
@@ -359,16 +371,13 @@ public class OrderServiceIml implements OrderService{
 
    
     // check the authenticated user whether he is the owner or not
-    private Order getAndCheckOrderForOwner(Long orderID, OrderStatus currentStatus) {
+    private Order getAndCheckOrderForOwner(Long orderID) {
         Order order = getByID(orderID);
         Users authUser = userService.getAuthUser();
         Restaurant restaurant = order.getRestaurant();
         Owner owner = restaurant.getOwner();
         if(authUser.getId() != owner.getUser().getId()) {
             throw new BadResultException("are not authorized to make acceptance");
-        }
-        if(!order.getStatus().equals(currentStatus)) {
-            throw new BadResultException("the order status is wrong");
         }
         return order;
     }
