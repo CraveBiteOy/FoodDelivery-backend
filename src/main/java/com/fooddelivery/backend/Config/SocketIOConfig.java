@@ -27,6 +27,7 @@ public class SocketIOConfig implements WebSocketMessageBrokerConfigurer {
   public void configureMessageBroker(MessageBrokerRegistry registry) {
       registry.setApplicationDestinationPrefixes("/app");
       registry.enableSimpleBroker("/order");
+      registry.enableSimpleBroker("/restaurant");
     //   registry.enableSimpleBroker("/testTopic");
   }
 

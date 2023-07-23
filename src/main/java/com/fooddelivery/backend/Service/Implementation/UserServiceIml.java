@@ -228,4 +228,14 @@ public class UserServiceIml implements UserService, UserDetailsService {
             System.out.println(res);
             return res;
     }
+
+    @Override
+    public UserResponse updateProfileImage(String imageurl) {
+            Users auth = getAuthUser();
+            auth.setImageurl(imageurl);
+            userRepos.save(auth);
+            UserResponse res = userMapper.mapUserToResponse(auth);
+            System.out.println(res);
+            return res;
+    }
 }

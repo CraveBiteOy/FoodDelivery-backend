@@ -65,11 +65,15 @@ public class UserController {
     }
 
     @PutMapping("/authUser/updateProfile")
-    public ResponseEntity<UserResponse> removeImage(@RequestParam(required = false) String firstname, @RequestParam(required = false) String surename) {
+    public ResponseEntity<UserResponse> updateProfile(@RequestParam(required = false) String firstname, @RequestParam(required = false) String surename) {
         return new ResponseEntity<UserResponse>(userService.updateProfile(firstname, surename), HttpStatus.OK);
     }
     @PutMapping("/authUser/updatePassword")
     public ResponseEntity<UserResponse> updatePassword(@Valid @RequestBody PasswordForm passwordForm) {
         return new ResponseEntity<UserResponse>(userService.updatePassword(passwordForm), HttpStatus.OK);
+    }
+    @PutMapping("/authUser/updateImage/{imageurl}")
+    public ResponseEntity<UserResponse> updateProfile(@PathVariable String imageurl) {
+        return new ResponseEntity<UserResponse>(userService.updateProfileImage(imageurl), HttpStatus.OK);
     }
 }

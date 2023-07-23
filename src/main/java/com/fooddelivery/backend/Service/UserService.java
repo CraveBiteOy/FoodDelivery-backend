@@ -19,4 +19,5 @@ public interface UserService {
     Users updateByCoordinate(Double longitude, Double latitude);
     UserResponse updateProfile(String firstname, String surename);
     UserResponse updatePassword(PasswordForm passwordForm);
+    UserResponse updateProfileImage(String imageurl);
 }
