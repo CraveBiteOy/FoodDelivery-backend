@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @PutMapping("/update/zipcode/{zipcode}/city/{city}/address/{address}")
-    public ResponseEntity<UserResponse> updateByCoordinate(@PathVariable String zipcode, @PathVariable String city, @PathVariable String address) {
+    public ResponseEntity<UserResponse> updateByTextAddress(@PathVariable String zipcode, @PathVariable String city, @PathVariable String address) {
         Users user = userService.updateByTextAddress(address, zipcode, city);
         return new ResponseEntity<UserResponse>(userMapper.mapUserToResponse(user), HttpStatus.OK);
     }
