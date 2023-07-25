@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fooddelivery.backend.Mapper.CourierMapper;
 import com.fooddelivery.backend.Models.Courier;
 import com.fooddelivery.backend.Models.Enums.CourierStatus;
+import com.fooddelivery.backend.Models.Enums.NavigationMode;
 import com.fooddelivery.backend.Models.Response.BasketResponse;
 import com.fooddelivery.backend.Models.Response.CourierResponse;
 import com.fooddelivery.backend.Service.CourierService;
@@ -92,5 +93,23 @@ public class CourierController {
         simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
         
         return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
+    }
+
+     // update navigation mode for authenticated courier
+    @PutMapping("/courier/authenticated/mode/{mode}")
+    public ResponseEntity<CourierResponse> updateNavigationMode( @PathVariable NavigationMode mode) {
+        CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateNavigationModeForCourier(mode));
+       
+        // the courier subscribe this websocket link to keep tracking the real-time courier data
+        simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
+        
+        return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/courier/authenticated/isNewCourier")
+    public ResponseEntity<Boolean> checkIsNewCourier() {
+        // CourierResponse res = courierMapper.mapCourierToResponse(courierService.getByAuthenticatedUser());
+        return new ResponseEntity<Boolean>(courierService.checkNewCourier(), HttpStatus.OK);
     }
 }

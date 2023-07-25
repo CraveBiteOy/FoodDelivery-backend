@@ -15,4 +15,6 @@ public interface CourierService {
     List<Courier> getOnlineAndAvailableCouriersFromMode(NavigationMode mode);
     Courier updateAvailableForAuthCourier(boolean available);
     Courier updateAvailableAndLocationForAuthCourier(boolean available, Double latitude, Double longitude);
+    Courier updateNavigationModeForCourier(NavigationMode mode);
+    Boolean checkNewCourier();
 }

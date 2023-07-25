@@ -99,6 +99,26 @@ public class CourierServiceIml implements CourierService {
         courier.setStatus(status);
         return courierRepos.save(courier);
     }
+
+    @Override
+    public Boolean checkNewCourier() {
+        Users authUser = userService.getAuthUser();
+        Optional<Courier> entity = courierRepos.findByUser(authUser);
+        if(!entity.isPresent()) {
+            Courier courier = new Courier(authUser, NavigationMode.BICYCLE);
+            courierRepos.save(courier);
+            return true;
+        } else {
+           return false;
+        }
+    }
+
+    @Override
+    public Courier updateNavigationModeForCourier(NavigationMode mode) {
+        Courier courier = getByAuthenticatedUser();
+        courier.setMode(mode);
+        return courierRepos.save(courier);
+    }
     
     
 }

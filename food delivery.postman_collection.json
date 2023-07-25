@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"khanh\",\r\n    \"password\": \"123456\",\r\n    \"longitude\": 25.4741416,\r\n    \"latitude\": 65.0568661\r\n\r\n}",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\",\r\n    \"longitude\": 25.47411,\r\n    \"latitude\": 65.05695\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -152,6 +152,110 @@
 								"users",
 								"authUser",
 								"getAuthUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5ODkyNzI2LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.jXUNBco7pYfGsQe1iA_Mfb-r9MjBuUCN6Yfwr1GfOcs4zZiHBvEJAgTXj0uYrufURzVgFhhALmOYqZm-LQjkFA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/authUser/updateProfile?firstname=quan1996&surename",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"authUser",
+								"updateProfile"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "quan1996"
+								},
+								{
+									"key": "surename",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5ODkyNjAxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.nP7GZK_T0Jt_ol5pqO8KIMgOfDCAwTMOqwbh9k6YZC-DmMK85kDqZATwIcSIc6YyJI23LvXancA0Bxezx_XJ8Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123456\",\r\n    \"newPassword\": \"1234567\",\r\n    \"confirmPassword\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/authUser/updatePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"authUser",
+								"updatePassword"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "quan1996",
+									"disabled": true
+								},
+								{
+									"key": "surename",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -328,6 +432,40 @@
 					"response": []
 				},
 				{
+					"name": "get restaurant by restaurant id and authenticated Customser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdXkiLCJleHAiOjE2ODk1MTk3OTksImF1dGhvcml0aWVzIjpbIlVTRVIiXX0.8506PL7vSZcCo6Yi0N2PcdxsowcMFBp0uYGSmjiiFexntNGCHrg2NEDbodQQTQeHQ1p2OJYb5XVms3zT7DWIDA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/restaurant/authenticatedCustomer/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"restaurant",
+								"authenticatedCustomer",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "update restaurant by restaurant id for new name and new image url",
 					"request": {
 						"auth": {
@@ -335,7 +473,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY1NTk4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.0kWa1oHCFql_ilv5mcs_0LiZYxuZldXZMZw6qj7XJpgyDDs2e7W96fa38IHYEOHl4h_WGeI4RKoUveV1T2PFiQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY5MDA0NzExNSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.szQVuxJvg1tlI0SO5biwwg96nCSosj_htepvest9Je2_EWP1SkeXp-_kGwUqarkjUz3IFfiE_f37-49s2ZUEwA",
 									"type": "string"
 								}
 							]
@@ -343,7 +481,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/restaurants/restaurant/id/5?name=mehilainen&imageurl=kjhaksjdhf.png",
+							"raw": "http://localhost:8080/api/restaurants/restaurant/id/1?name=pure maku 2&imageurl=lkjslfk.png&cookingTime=15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -354,16 +492,20 @@
 								"restaurants",
 								"restaurant",
 								"id",
-								"5"
+								"1"
 							],
 							"query": [
 								{
 									"key": "name",
-									"value": "mehilainen"
+									"value": "pure maku 2"
 								},
 								{
 									"key": "imageurl",
-									"value": "kjhaksjdhf.png"
+									"value": "lkjslfk.png"
+								},
+								{
+									"key": "cookingTime",
+									"value": "15"
 								}
 							]
 						}
@@ -436,6 +578,70 @@
 					"response": []
 				},
 				{
+					"name": "get the first restaurant for the authenticated owner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY5MDA0NzExNSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.szQVuxJvg1tlI0SO5biwwg96nCSosj_htepvest9Je2_EWP1SkeXp-_kGwUqarkjUz3IFfiE_f37-49s2ZUEwA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/authenticatedOwner/firstRestaurant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"authenticatedOwner",
+								"firstRestaurant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check whether the authenticated owner has any restaurant or not",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5OTQ2ODA3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.O07bpzvzWid2GmayCP1SBQISBWCiNtmeewqpcqtpDVhUIg88L9ZGLzkZmyVSXf4sTkH9JnfoMpZNWwmUOPsl_Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/restaurants/authenticatedOwner/checkRestaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"restaurants",
+								"authenticatedOwner",
+								"checkRestaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get all recommended restaurants for the authenticated customers based on his current location within 20km",
 					"request": {
 						"auth": {
@@ -443,7 +649,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY0NTY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19._T5zj7KeSlsOKy0jVUGPfbDiQmkrTwvTS7JwN6hZImAcT_FQhoYEVW8Q3dsIgUZ4VAw3CQ_xs9a2WM1jz_L-_w",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdXkiLCJleHAiOjE2ODk1MTk2ODEsImF1dGhvcml0aWVzIjpbIlVTRVIiXX0.tYTmey05YBkpSVsnpKp5rMUwDGOKtoQzmsbRBNm9lZgOrfMUBhnDLuZOz8Qu3vHF4QiMKnCBh1M81wo8u3Gktg",
 									"type": "string"
 								}
 							]
@@ -474,7 +680,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY1NDA2LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Lxwvc_eS73eQrsQ_7SgkbaBVB7dFS3kRTnb1PV0jMeFIfgppvMhy24dVx8XOkvr1aEN8aLB6RgrEsAOyUtSz1g",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuMyIsImV4cCI6MTY5MDAzNDU1MSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.K3FNkcf-jIlO0j0DggvPHsjiEYPCzTlRcG5CxT3Gmxf71ZH-oGULkQxy8o1I2CH4r3yyti2S3i0fNVCSTsP_eQ",
 									"type": "string"
 								}
 							]
@@ -483,7 +689,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"terveystalo\",\r\n    \"address\": \"yliopistokatu 2\",\r\n    \"imageurl\": \"lkajsdlfkjsldf.png\",\r\n    \"city\": \"oulu\",\r\n    \"zipcode\": \"90570\"\r\n}",
+							"raw": "{\r\n    \"name\": \"terveystalo\",\r\n    \"address\": \"yliopistokatu 2\",\r\n    \"imageurl\": \"lkajsdlfkjsldf.png\",\r\n    \"city\": \"oulu\",\r\n    \"zipcode\": \"90570\",\r\n    \"cookingTime\": 20\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -623,24 +829,15 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4ODk2NjQ3OCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KO0q5WYITjwPzfh0FQyBVbbMtLMwUACgYoCgDUVnzaDnMlnNiVz6XrZ3MRYhiWDMlNe4l1aMBJnpSi1-BMunvQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4OTk1ODY1OSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.Edqw9oySyV2m19mNeq0RQ8O0Setzqh4UUwfDJPWM4nGZbxQUsOq6Ot0jTKP8kWTXn5cU8Ba4AOezBH_Ve9g4YA",
 									"type": "string"
 								}
 							]
 						},
 						"method": "PUT",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"choimin\",\r\n    \"description\": \"chinese noodle style\",\r\n    \"price\": 11,\r\n    \"restaurant\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/dishes/dish/17?name=choy min 2&description=spicy&price=12&imageurl=image.png",
+							"raw": "http://localhost:8080/api/dishes/dish/2?name=choy min 2&description=spicy2&price=12&imageurl=image.png&availability=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -650,7 +847,7 @@
 								"api",
 								"dishes",
 								"dish",
-								"17"
+								"2"
 							],
 							"query": [
 								{
@@ -659,7 +856,7 @@
 								},
 								{
 									"key": "description",
-									"value": "spicy"
+									"value": "spicy2"
 								},
 								{
 									"key": "price",
@@ -668,6 +865,10 @@
 								{
 									"key": "imageurl",
 									"value": "image.png"
+								},
+								{
+									"key": "availability",
+									"value": "true"
 								}
 							]
 						}
@@ -682,24 +883,15 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4ODk2NjQ3OCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.KO0q5WYITjwPzfh0FQyBVbbMtLMwUACgYoCgDUVnzaDnMlnNiVz6XrZ3MRYhiWDMlNe4l1aMBJnpSi1-BMunvQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY5MDEzOTI0NiwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.Wz8fKy2Ni_VVYclg5qvs-W8jJrw5BKRmQYzfb8IUE9u6z8e8GMhC7TpAtaaRndngYzVF_g36gQRaiVvXp9Njkw",
 									"type": "string"
 								}
 							]
 						},
 						"method": "PUT",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"choimin\",\r\n    \"description\": \"chinese noodle style\",\r\n    \"price\": 11,\r\n    \"restaurant\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/dishes/dish/17/availability/false",
+							"raw": "http://localhost:8080/api/dishes/dish/3/availability/false",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -709,7 +901,7 @@
 								"api",
 								"dishes",
 								"dish",
-								"17",
+								"3",
 								"availability",
 								"false"
 							],
@@ -752,7 +944,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY3MDg4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.qeEpS5fCHlm97zwP8-hF95TFIDtfphyaE42y7o7mmOrIRoyQWgSGpHNj0iEu8vfK75RLxz0nxSk23ZYeL1K4jQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5MTQxNDUwLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.YhHXH3PKlxEXhbXVBWwfmDP-juLqvQwdlHgaySOgCsr28S2iOPyjis2jqi4nV3qEe_OCmVcwSGRztMAYetCUzw",
 									"type": "string"
 								}
 							]
@@ -822,7 +1014,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTY5NjA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.6JZsdxOK538Mtd7XRFLJKMfR_Je1hYuS2SpKuzoJCy46atHYr5P_olmWMc01YEMblPKnKrx3myV-17RCoMhsqQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMzA3MTI1LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.ipJceZtFeM21CrNTAkmxofFR4qSTbDz7wfZXEYBZmITjYt7ZBQOkf9bl6ulmc9AcHN8c35tk8F5BFtSITo5pkA",
 									"type": "string"
 								}
 							]
@@ -841,6 +1033,39 @@
 								"couriers",
 								"courier",
 								"authenticated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check whether the courier is new or not",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMzA3MDMxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.4WD2yDawf0N9pzDuDAFFRZtaj6vAsp4XUTJqQnIxtV3GMOSfD9I3NR2QvcyzaEOphQ0-0Py9vMdTlZ0tsP0FpQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated/isNewCourier",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated",
+								"isNewCourier"
 							]
 						}
 					},
@@ -1022,6 +1247,40 @@
 					"response": []
 				},
 				{
+					"name": "update navigation mode for the courier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMzA3MTI1LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.ipJceZtFeM21CrNTAkmxofFR4qSTbDz7wfZXEYBZmITjYt7ZBQOkf9bl6ulmc9AcHN8c35tk8F5BFtSITo5pkA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/couriers/courier/authenticated/mode/CAR",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"couriers",
+								"courier",
+								"authenticated",
+								"mode",
+								"CAR"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get list of available and online couriers",
 					"request": {
 						"auth": {
@@ -1066,7 +1325,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMTM4MDMxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.J9-OQV4PErXlwN0cAVTNlIin22401xlMFYTZDcUej4IGRXMTUdjHIHlhOGCITjIXINCdrf1aSG2be7uw0qChSA",
 									"type": "string"
 								}
 							]
@@ -1074,7 +1333,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/baskets/authenticatedUser/restaurant/2",
+							"raw": "http://localhost:8080/api/baskets/authenticatedUser/restaurant/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1085,7 +1344,7 @@
 								"baskets",
 								"authenticatedUser",
 								"restaurant",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -1159,76 +1418,6 @@
 					"response": []
 				},
 				{
-					"name": "add dish to basket",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/baskets/basket/1/dish/6/quantity/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"baskets",
-								"basket",
-								"1",
-								"dish",
-								"6",
-								"quantity",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "remove basket dish from basket",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/baskets/remove/basketDish/1/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"baskets",
-								"remove",
-								"basketDish",
-								"1",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "remove all basket dishes from basket",
 					"request": {
 						"auth": {
@@ -1236,7 +1425,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5NTczODkzLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.vpf8cRHKThEVcFGRCrw6DiXBqVluOGCTRJVDXgX-7Fd-MLM9KSegxjXb0pNSZp1Fn2jKjJoXtjqe1tcpJH2MAw",
 									"type": "string"
 								}
 							]
@@ -1307,7 +1496,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTcwMzY3LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.Fjy4la-mnzUxw3xjgChRJkQUP6khOUvNSKd8ATVEVGw4Qn3PzzBov4AiQrGLZ2hLwgEhHmJid_9-sTlSwiigcA",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5MTQxNDUwLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.YhHXH3PKlxEXhbXVBWwfmDP-juLqvQwdlHgaySOgCsr28S2iOPyjis2jqi4nV3qEe_OCmVcwSGRztMAYetCUzw",
 									"type": "string"
 								}
 							]
@@ -1332,7 +1521,7 @@
 					"response": []
 				},
 				{
-					"name": "get list of basket dishes by basket Id Copy",
+					"name": "get basket dish by dish ID and basket ID",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1359,6 +1548,597 @@
 								"dish",
 								"6",
 								"basket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add dish to basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMTM4MDMxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.J9-OQV4PErXlwN0cAVTNlIin22401xlMFYTZDcUej4IGRXMTUdjHIHlhOGCITjIXINCdrf1aSG2be7uw0qChSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/BasketDishes/basket/1/dish/3/quantity/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"BasketDishes",
+								"basket",
+								"1",
+								"dish",
+								"3",
+								"quantity",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove basket dish from basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5NTczODkzLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.vpf8cRHKThEVcFGRCrw6DiXBqVluOGCTRJVDXgX-7Fd-MLM9KSegxjXb0pNSZp1Fn2jKjJoXtjqe1tcpJH2MAw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/BasketDishes/remove/basketDish/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"BasketDishes",
+								"remove",
+								"basketDish",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update basket dish by basketDish id and new quantity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5NTczODkzLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.vpf8cRHKThEVcFGRCrw6DiXBqVluOGCTRJVDXgX-7Fd-MLM9KSegxjXb0pNSZp1Fn2jKjJoXtjqe1tcpJH2MAw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/BasketDishes/update/basketDish/1/quantity/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"BasketDishes",
+								"update",
+								"basketDish",
+								"1",
+								"quantity",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "create new order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMTM4MDMxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.J9-OQV4PErXlwN0cAVTNlIin22401xlMFYTZDcUej4IGRXMTUdjHIHlhOGCITjIXINCdrf1aSG2be7uw0qChSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"basketID\": \"1\",\r\n    \"address\": \"yliopistokatu 12\",\r\n    \"zipcode\": \"90570\",\r\n    \"city\": \"oulu\",\r\n    \"note\": \"the door code is 4322\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reorder  new one from the previous order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4OTc5MjE5NywiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.DQZPhN-geFqrTnx6vtFbCAsxHmuwg4qY3m6QRWX3aRfB0pTH_eWo7-dVBGpmi0AgI_G07BDxXk5Mq-cXCOunAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/reorder/previousOrder/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"reorder",
+								"previousOrder",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "the owner accept the order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY5MDEzODA3MCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.aVT3n003Vfrj9LqF6P4SQJFIPg31_NWQEET31hS8JOV3u3N-bICWRO-lkibsxNRN_tcLLNFWJdWCTDWfM-wiOQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/acceptByOwner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"acceptByOwner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "the owner rejects the order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY4OTg0MTk0MywiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.IreTdyuTyJlGsN13vu56IZMBLKrUtucoG02ObVmaTpdLega8kp1tsyA9ARtufW89iv5mQsX4YYBpF0bHSJ5Q2A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/2/rejectByOwner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"2",
+								"rejectByOwner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "the owner finishes the cooking for order and is ready for being picked up",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJraGFuaCIsImV4cCI6MTY5MDEzODA3MCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.aVT3n003Vfrj9LqF6P4SQJFIPg31_NWQEET31hS8JOV3u3N-bICWRO-lkibsxNRN_tcLLNFWJdWCTDWfM-wiOQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/finishCooking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"finishCooking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "the courier accept order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJteSIsImV4cCI6MTY5MDEzODA5NSwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.Kx7KMutp_hNqSLA7-Mjz9aZ0RPFGPNnxuWgln6apT-glCor1V3SWE3E4p8ZL1bYlmTT6LQ51sb1cDup4ITpAxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/acceptByCourier",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"acceptByCourier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "the courier reject the order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5MDcxNzA0LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.j8VwN0Pgki6pWhSaV4Gq4eQQb4aqoIEVIVmiv_yey1VcbONXDNP8EoO7O6OSeq8fbhhyNI_8D5lEVf7h2_MXgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/rejectByCourier",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"rejectByCourier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "the order is picked up",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJteSIsImV4cCI6MTY5MDEzODM3NCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.ANMhBlDIU-cTsyQrjfFnKfogKe4N127P0U6mfKrDvigfmpwv3GfxxRhvwaK6N12IRfLlV_AXHSf0qLnhUVPITw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/pickedUp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"pickedUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "complete the order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJteSIsImV4cCI6MTY5MDEzODQ0NywiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.rHuKzOMI14NopNaYzNd1YbA9oUTyHAJQ_QKEKo0MiprbKOHOf-BWrJqGBxz8YlmNW5UFifERa7k8xZbBIgkpcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/completed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"completed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update the location for order after being picked up by the courier, the longitude and latitude request are gotten from the location of authenticated courier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJteSIsImV4cCI6MTY5MDEzODQ0NywiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.rHuKzOMI14NopNaYzNd1YbA9oUTyHAJQ_QKEKo0MiprbKOHOf-BWrJqGBxz8YlmNW5UFifERa7k8xZbBIgkpcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1/locationUpdate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1",
+								"locationUpdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get the order by order ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjkwMTM3Nzc4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.dANOCGBDPQC7eKKQhyKJIFWtZ71f3A1y9LJ4whhPXOjEMgG6Wvrumwlh8tUohwTF3m5bpItjIIIC16dVAF8qpQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/order/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"order",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list orders by customer ID and Order status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5ODAxNDY5LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.IPWALs5YqTbXQ7dKnIlXZadHZE_xkkUaEQzHhVy5zyKPd0tSbpJcVJORm0t9WIbRQKYfkM5gABY6Z643IvMTfQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/customer/1/status/COMPLETED",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"customer",
+								"1",
+								"status",
+								"COMPLETED"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orderDish",
+			"item": [
+				{
+					"name": "get order dishes in the order by order ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoYWlyaiIsImV4cCI6MTY4OTE0MjI1NSwiYXV0aG9yaXRpZXMiOltdfQ.RHKIBrLZj9vHBds523w01IP6Ozl1mw1-lfYOz_uJBeZOR-MlxcM_8W1K-qC-NXldQya0MiJtFKVZs521IPxv7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orderdishes/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orderdishes",
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order dish by order dish ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoYWlyaiIsImV4cCI6MTY4OTE0MjI1NSwiYXV0aG9yaXRpZXMiOltdfQ.RHKIBrLZj9vHBds523w01IP6Ozl1mw1-lfYOz_uJBeZOR-MlxcM_8W1K-qC-NXldQya0MiJtFKVZs521IPxv7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orderdishes/orderdish/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orderdishes",
+								"orderdish",
 								"1"
 							]
 						}
