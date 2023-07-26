@@ -317,6 +317,13 @@ public class OrderServiceIml implements OrderService{
         return order;
     }
 
+    @Override
+    public Order updateLocationForTheOrderAndCourier(Long orderID, Double latitude, Double longitude) {
+        Courier courier = courierService.updateLocationforAuthCourier(latitude, longitude);
+        Order order = updateLocationOfTheOrder(orderID);
+        return order;
+    }
+
 
     @Override
     public List<Order> getByCourier(Long courierID) {
@@ -424,5 +431,6 @@ public class OrderServiceIml implements OrderService{
             } 
           
     }
-    
+
+   
 }

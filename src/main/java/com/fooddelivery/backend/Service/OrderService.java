@@ -24,5 +24,5 @@ public interface OrderService {
     Order pickedUpOrderByCourier(Long orderID);
     Order completedOrderByCourier(Long orderID);
     Order updateLocationOfTheOrder(Long orderID);
-
+    Order updateLocationForTheOrderAndCourier(Long orderID, Double latitude, Double longitude);
 }
