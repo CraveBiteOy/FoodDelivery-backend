@@ -2,6 +2,7 @@ package com.fooddelivery.backend.Service.Implementation;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -245,7 +246,7 @@ public class OrderServiceIml implements OrderService{
             throw new BadResultException("the authenticated courier is not authorized to reject the order");
         }
         if(order.getStatus().equals(OrderStatus.READY_FOR_PICKUP) || order.getStatus().equals(OrderStatus.COOKING)) {
-            Courier newCourier = reachCourier(order);
+            Courier newCourier = reachCourier(order, courier);
             order.setCourier(newCourier);
             order = orderRepos.save(order);
             return order;
@@ -399,6 +400,44 @@ public class OrderServiceIml implements OrderService{
             couriers = courierService.getOnlineAndAvailableCouriersFromMode(NavigationMode.BICYCLE);
         }
         System.out.println(couriers);
+        if (couriers.size() <= 0) {
+            throw new BadResultException("there is no available courier for the order");
+        }
+        else if (couriers.size() == 1) {
+           return couriers.get(0);
+        } else {
+            Double longitude = order.getFromLongitude();
+            Double latitude = order.getFromLatitude();
+            Courier courier;
+            double shortestDistance;
+            courier = couriers.get(0);
+            shortestDistance = distanceCoding.distanceCalculator(latitude, courier.getUser().getLatitude(), longitude, courier.getUser().getLongitude());
+
+            // comparing the distace to restaurant amongst couriers 
+            for(int i = 1; i < couriers.size(); i++) {
+                Courier courier2 = couriers.get(i);
+                double distance = distanceCoding.distanceCalculator(latitude, courier2.getUser().getLatitude(), longitude, courier2.getUser().getLongitude());
+
+                if(distance < shortestDistance) {
+                    shortestDistance = distance;
+                    courier = courier2;
+                }
+            }
+            return courier;
+        }
+    }
+
+   // after the declined courier reject the order, find the active and available courier whose location is closest to the restaurant to carry out the order after the order's cooking stage is done, exclude the declined courier. 
+    private Courier reachCourier(Order order, Courier declinedCourier) {
+        List<Courier> couriers;
+        
+        if(order.getD2Distance() > navigationModeDistance) {
+            couriers = courierService.getOnlineAndAvailableCouriersFromMode(NavigationMode.CAR);
+        } else {
+            couriers = courierService.getOnlineAndAvailableCouriersFromMode(NavigationMode.BICYCLE);
+        }
+        System.out.println(couriers);
+        couriers = couriers.stream().filter(cour -> cour.getId() != declinedCourier.getId()).collect(Collectors.toList());
         if (couriers.size() == 0) {
             throw new BadResultException("there is no available courier for the order");
         }
@@ -422,15 +461,6 @@ public class OrderServiceIml implements OrderService{
                     courier = courier2;
                 }
             }
-            if (shortestDistance <= 20) {
-                return courier;
-            } else {
-                System.out.println(courier);
-                System.out.println(shortestDistance);
-                throw new BadResultException("there is no available courier for the order");
-            } 
-          
+            return courier;
     }
-
-   
 }

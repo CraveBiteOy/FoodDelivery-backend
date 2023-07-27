@@ -78,11 +78,18 @@ public class BackendApplication {
 			Courier courier1 = new Courier(hairj, NavigationMode.CAR);
 			courier1.setStatus(CourierStatus.ONLINE);
 			courier1.setAvailable(true);
+
 			Courier courier2 = new Courier(my, NavigationMode.BICYCLE);
 			courier2.setStatus(CourierStatus.ONLINE);
 			courier2.setAvailable(true);
+
+			Courier courier3 = new Courier(duy, NavigationMode.BICYCLE);
+			courier3.setStatus(CourierStatus.ONLINE);
+			courier3.setAvailable(true);
+
 			courierRepos.save(courier1);
 			courierRepos.save(courier2);
+			courierRepos.save(courier3);
 
 			Owner owner1 = new Owner(khanh);
 			Owner owner2 = new Owner(duy);
