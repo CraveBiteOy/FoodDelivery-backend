@@ -112,8 +112,11 @@ public class UserServiceIml implements UserService, UserDetailsService {
         if(entity.isPresent()) {
          throw new EntityExistingException("the username exists");
         }
-        Users user = new Users(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getFirstname(), signUp.getSurename(), signUp.getLatitude(), signUp.getLongitude(), signUp.getImageurl());
-        // user.getRoles().add(Role.USER);
+        Users user = new Users(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getFirstname(), signUp.getSurename(), signUp.getLatitude(), signUp.getLongitude());
+        user.getRoles().add(Role.USER);
+        if(signUp.getImageurl() != null) {
+            user.setImageurl(signUp.getImageurl());
+        }
         userRepos.save(user);
 
         List<String> claims = user.getRoles().stream().map(auth -> auth.getName()).collect(Collectors.toList());

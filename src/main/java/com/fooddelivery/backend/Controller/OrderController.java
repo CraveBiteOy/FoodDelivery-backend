@@ -221,11 +221,7 @@ public class OrderController {
         simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
 
         // customer and courier subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
-
-         // the courier subscribe this websocket link to keep tracking the real-time courier data
-         simpMessagingTemplate.convertAndSend("/courier/" + order.getCourier().getId(), courierResponse);
-        
+        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);     
         
         // courier subscribe this websocket link to get notified for the updating order
         simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
@@ -242,9 +238,6 @@ public class OrderController {
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
         simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
 
-       // courier subscribe this websocket link to get notified for the incoming order
-        simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
-
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
 
@@ -260,9 +253,6 @@ public class OrderController {
 
         // customer  subscribe this websocket link to keep tracking the order data in real time
         simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
-
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + order.getCourier().getId(), courierResponse);
 
         // courier subscribe this websocket link to get notified for the updating order
         simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
@@ -283,9 +273,6 @@ public class OrderController {
         // customer and courier subscribe this websocket link to keep tracking the order data in real time
         simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
 
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + order.getCourier().getId(), courierResponse);
-
          // courier subscribe this websocket link to get notified for the updating order
         simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
 
@@ -293,28 +280,28 @@ public class OrderController {
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
 
-    // update the location for order after being picked up by the courier, the longitude and latitude request are gotten from the location of authenticated courier 
-    @PutMapping("/order/id/{id}/locationUpdate")
-    public ResponseEntity<OrderResponse> updateOrderLocation(@PathVariable Long id) {
-        Order order = orderService.updateLocationOfTheOrder(id);
-        OrderResponse res = orderMapper.mapOrderToResponse(order);
-        CourierResponse courierResponse = courierMapper.mapCourierToResponse(order.getCourier());
+    // // update the location for order after being picked up by the courier, the longitude and latitude request are gotten from the location of authenticated courier 
+    // @PutMapping("/order/id/{id}/locationUpdate")
+    // public ResponseEntity<OrderResponse> updateOrderLocation(@PathVariable Long id) {
+    //     Order order = orderService.updateLocationOfTheOrder(id);
+    //     OrderResponse res = orderMapper.mapOrderToResponse(order);
+    //     CourierResponse courierResponse = courierMapper.mapCourierToResponse(order.getCourier());
 
-         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+    //      // restaurant owner subscribe this websocket link to keep tracking the order data in real time
+    //     simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
 
-        // customer and courier subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+    //     // customer and courier subscribe this websocket link to keep tracking the order data in real time
+    //     simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
 
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + order.getCourier().getId(), courierResponse);
+    //     // the courier subscribe this websocket link to keep tracking the real-time courier data
+    //     simpMessagingTemplate.convertAndSend("/courier/" + order.getCourier().getId(), courierResponse);
 
-        // courier subscribe this websocket link to get notified for the updating order
-        simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+    //     // courier subscribe this websocket link to get notified for the updating order
+    //     simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
 
 
-        return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
+    // }
 
 
      // update the location for order and the authenticated courier after being picked up by the courier, the longitude and latitude are adhered to the url pathvariables 
@@ -329,9 +316,6 @@ public class OrderController {
 
         // customer and courier subscribe this websocket link to keep tracking the order data in real time
         simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
-
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + order.getCourier().getId(), courierResponse);
 
         // courier subscribe this websocket link to get notified for the updating order
         simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);

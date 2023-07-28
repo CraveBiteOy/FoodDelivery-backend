@@ -56,53 +56,41 @@ public class CourierController {
     @PutMapping("/courier/authenticated/status/{status}")
     public ResponseEntity<CourierResponse> updateStatus(@PathVariable CourierStatus status) {
         CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateStatusForAuthCourier(status));
-
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
-
         return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
     }
     // update location for authenticated courier
     @PutMapping("/courier/authenticated/longitude/{longitude}/latitude/{latitude}")
     public ResponseEntity<CourierResponse> updateLocation(@PathVariable Double longitude, @PathVariable Double latitude) {
         CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateLocationforAuthCourier(latitude, longitude));
-
-         // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
-
         return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
     }
 
-    // update location and availability for authenticated courier
-    @PutMapping("/courier/authenticated/longitude/{longitude}/latitude/{latitude}/available/{available}")
-    public ResponseEntity<CourierResponse> updateLocationAndAvailability(@PathVariable Double longitude, @PathVariable Double latitude, @PathVariable boolean available) {
-        CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateAvailableAndLocationForAuthCourier(available, latitude, longitude));
+    // // update location and availability for authenticated courier
+    // @PutMapping("/courier/authenticated/longitude/{longitude}/latitude/{latitude}/available/{available}")
+    // public ResponseEntity<CourierResponse> updateLocationAndAvailability(@PathVariable Double longitude, @PathVariable Double latitude, @PathVariable boolean available) {
+    //     CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateAvailableAndLocationForAuthCourier(available, latitude, longitude));
         
-         // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
+    //     //  // the courier subscribe this websocket link to keep tracking the real-time courier data
+    //     // simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
 
-        return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
+    // }
 
-    // update availability for authenticated courier
-    @PutMapping("/courier/authenticated/available/{available}")
-    public ResponseEntity<CourierResponse> updateAvailability( @PathVariable boolean available) {
-        CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateAvailableForAuthCourier(available));
+    // // update availability for authenticated courier
+    // @PutMapping("/courier/authenticated/available/{available}")
+    // public ResponseEntity<CourierResponse> updateAvailability( @PathVariable boolean available) {
+    //     CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateAvailableForAuthCourier(available));
        
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
+    //     // // the courier subscribe this websocket link to keep tracking the real-time courier data
+    //     // simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
         
-        return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
+    // }
 
      // update navigation mode for authenticated courier
     @PutMapping("/courier/authenticated/mode/{mode}")
     public ResponseEntity<CourierResponse> updateNavigationMode( @PathVariable NavigationMode mode) {
         CourierResponse res = courierMapper.mapCourierToResponse(courierService.updateNavigationModeForCourier(mode));
-       
-        // the courier subscribe this websocket link to keep tracking the real-time courier data
-        simpMessagingTemplate.convertAndSend("/courier/" + res.getId(), res);
-        
         return new ResponseEntity<CourierResponse>(res, HttpStatus.OK);
     }
 

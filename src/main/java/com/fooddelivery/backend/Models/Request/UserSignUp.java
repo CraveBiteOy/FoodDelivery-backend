@@ -26,6 +26,18 @@ public class UserSignUp {
         this.firstname = firstname;
         this.surename = surename;
     }
+
+    public UserSignUp(String username, String password, String firstname, String surename, double longitude,
+            double latitude) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.surename = surename;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    
     
     
 }
