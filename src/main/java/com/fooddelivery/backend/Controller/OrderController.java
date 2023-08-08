@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fooddelivery.backend.Kafka.Producers.OrderProducer;
 import com.fooddelivery.backend.Mapper.CourierMapper;
 import com.fooddelivery.backend.Mapper.OrderMapper;
 import com.fooddelivery.backend.Models.Courier;
@@ -38,8 +39,10 @@ public class OrderController {
     OrderMapper orderMapper;
     @Autowired
     CourierMapper courierMapper;
+    // @Autowired
+    // SimpMessagingTemplate simpMessagingTemplate;
     @Autowired
-    SimpMessagingTemplate simpMessagingTemplate;
+    OrderProducer orderProducer;
 
 
     // get order by  order Id
@@ -123,10 +126,12 @@ public class OrderController {
         System.out.println("/restaurant/" + res.getRestaurant().getId());
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // the customer subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.CREATED);
     }
@@ -138,10 +143,12 @@ public class OrderController {
         OrderResponse res = orderMapper.mapOrderToResponse(order);
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // the customer subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.CREATED);
     }
@@ -161,14 +168,17 @@ public class OrderController {
         Courier courier = order.getCourier();
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
        // the customer subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+         orderProducer.sendToCustomer(res);
 
         if(courier != null) {
             // courier subscribe this websocket link to get notified for the updating order
-            simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+            // simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+            orderProducer.sendToCourier(res);
         }
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
@@ -181,10 +191,12 @@ public class OrderController {
         OrderResponse res = orderMapper.mapOrderToResponse(order);
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // the customer subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
@@ -197,14 +209,17 @@ public class OrderController {
         Courier courier = order.getCourier();
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // customer subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
         if(courier != null) {
             // courier subscribe this websocket link to get notified for the updating order
-            simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+            // simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+            orderProducer.sendToCourier(res);
         }
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
@@ -218,13 +233,16 @@ public class OrderController {
         CourierResponse courierResponse = courierMapper.mapCourierToResponse(order.getCourier());
         
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // customer and courier subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);     
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);     
+        orderProducer.sendToCustomer(res);
         
         // courier subscribe this websocket link to get notified for the updating order
-        simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        orderProducer.sendToCourier(res);
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
@@ -236,7 +254,8 @@ public class OrderController {
         OrderResponse res = orderMapper.mapOrderToResponse(order);
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
@@ -249,13 +268,16 @@ public class OrderController {
         CourierResponse courierResponse = courierMapper.mapCourierToResponse(order.getCourier());
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // customer  subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
         // courier subscribe this websocket link to get notified for the updating order
-        simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        orderProducer.sendToCourier(res);
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
     }
@@ -268,13 +290,16 @@ public class OrderController {
         CourierResponse courierResponse = courierMapper.mapCourierToResponse(order.getCourier());
 
         // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // customer and courier subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
          // courier subscribe this websocket link to get notified for the updating order
-        simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        orderProducer.sendToCourier(res);
 
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);
@@ -312,13 +337,16 @@ public class OrderController {
         CourierResponse courierResponse = courierMapper.mapCourierToResponse(order.getCourier());
 
          // restaurant owner subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/restaurant/" + res.getRestaurant().getId(), res);
+        orderProducer.sendToRestaurant(res);
 
         // customer and courier subscribe this websocket link to keep tracking the order data in real time
-        simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/" + order.getId(), res);
+        orderProducer.sendToCustomer(res);
 
         // courier subscribe this websocket link to get notified for the updating order
-        simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        // simpMessagingTemplate.convertAndSend("/order/courier/" + order.getCourier().getId(), res);
+        orderProducer.sendToCourier(res);
 
 
         return new ResponseEntity<OrderResponse>(res, HttpStatus.OK);

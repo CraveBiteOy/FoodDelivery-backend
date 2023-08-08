@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
+// import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -143,7 +143,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
         }
         Users user = entity.get();
         if(!new BCryptPasswordEncoder().matches(userSignIn.getPassword(), user.getPassword())) {
-            throw new BadCredentialsException("the password is wrong");
+            throw new EntityNotFoundException("the password is wrong");
         }
         
         if(userSignIn.getLatitude() != null && userSignIn.getLongitude() != null) {
