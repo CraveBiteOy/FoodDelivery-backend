@@ -4,8 +4,9 @@ Java springBoot, Apache Kafka and Websocket for food-delivery project backend
 # Food Delivery Project
 The project aims to simulate the whole process of food delivered from the time when customer makes the order, then the restaurant confirms and cooks the order, the order is finally delivery by the courier to the customer's destination. The project focuses on the order delivery tracking in real-time, so all customer, restaurant, courier will be informed of the order's status whenever it's status get updated by other entities. The project includes three separate mobile apps for couriers, customers, and restaurants.  
 
-The Food delivery project includes 4 repositories and was developed by Quan Doan and Hajri Mohamed.
+The Food delivery project includes 5 repositories and was developed by Quan Doan and Hajri Mohamed.
 - Backend repository: Quan Doan
+- Backend-V2 repository: Hajri Mohamed
 - Customer mobile: Quan Doan 
 - Restaurant mobile: Quan Doan
 - Courier mobile: Hajri Mohamed
@@ -46,3 +47,11 @@ The Food delivery project includes 4 repositories and was developed by Quan Doan
 - React-Native
 - Typescript
 - Tailwind CSS
+
+# Technologies for this repository
+- SpringBoot, Spring Security, Maven
+- WebSocket
+- Apache Kafka
+- Docker
+- PostgresSQL
+
